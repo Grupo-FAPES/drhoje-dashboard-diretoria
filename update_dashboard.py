@@ -40,6 +40,7 @@ params = {
 # Fetch data with retry mechanism
 max_retries = 3
 df_contratos = None
+is_api_success = False
 for i in range(max_retries):
     try:
         print(f"Tentando buscar registros (tentativa {i+1})...")
@@ -48,15 +49,28 @@ for i in range(max_retries):
             data_json = response.json()
             df_contratos = pd.DataFrame(data_json)
             print(f"Sucesso! {len(df_contratos)} registros recuperados.")
+            is_api_success = True
             break
+        else:
+            print(f"Falha na tentativa {i+1}: Status HTTP {response.status_code}")
     except Exception as e:
         print(f"Erro na tentativa {i+1}: {e}")
         if i == max_retries - 1:
             raise e
 
 if df_contratos is None or len(df_contratos) == 0:
-    print("Nenhum dado recuperado. Encerrando.")
-    exit(1)
+    print("Nenhum dado novo recuperado da API.")
+    if os.path.exists("contratos_analitico.csv"):
+        print("Carregando base de dados local de backup (contratos_analitico.csv)...")
+        df_contratos = pd.read_csv("contratos_analitico.csv")
+    else:
+        print("Nenhum backup local encontrado. Encerrando.")
+        exit(1)
+else:
+    # Apenas salva no arquivo local se tivermos sucesso na requisição da API
+    # Para evitar salvar dados vazios ou corromper a base local
+    pass
+
 
 # Clean up encoding issues in key columns
 if 'tipo_contrato' in df_contratos.columns:
@@ -74,8 +88,9 @@ if 'motivo_exclusao' in df_contratos.columns:
 if 'total_geral' in df_contratos.columns:
     df_contratos['total_geral'] = pd.to_numeric(df_contratos['total_geral'].astype(str).str.replace(',', '.'), errors='coerce').fillna(0.0)
 
-# Save raw data to CSV locally for backup/audit
-df_contratos.to_csv("contratos_analitico.csv", index=False, encoding="utf-8-sig")
+# Save raw data to CSV locally for backup/audit if fetched fresh from API
+if is_api_success:
+    df_contratos.to_csv("contratos_analitico.csv", index=False, encoding="utf-8-sig")
 
 # --- DATA MANIPULATION & CALCULATIONS ---
 today = datetime.now()
@@ -303,7 +318,8 @@ detail_items = sorted(detail_items, key=parse_vig_date)
 
 inclusoes_junho_detalhe = {
     "mes_ref": inclusoes_junho_obs,
-    "itens": detail_items
+    "itens": detail_items,
+    "valor_total": round(current_period_inclusions['total_geral'].sum(), 1)
 }
 
 pagina1_data = {
