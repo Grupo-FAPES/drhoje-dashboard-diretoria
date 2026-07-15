@@ -568,29 +568,33 @@ const DATA = {
     "posicao_em": "2026-07-15",
     "atualizado_em": "2026-07-15",
     "versao_modelo": "1.0",
-    "observacao": "Estrutura de dados-mãe do dashboard executivo. Atualizar estes campos a partir da planilha semanal e regenerar PDF + artifact a partir deste arquivo para manter os 3 painéis consistentes."
+    "observacao": "Atualizado de forma automática via GitHub Actions"
   },
   "pagina1_visao_executiva": {
     "titulo": "VISÃO EXECUTIVA - CARTEIRA DE BENEFICIÁRIOS",
     "kpis": {
-      "vidas_ativas": 8555,
-      "empresarial": 8254,
-      "empresarial_pct": 96.5,
-      "adesao": 301,
-      "adesao_pct": 3.5,
-      "inclusoes_junho": 136,
+      "vidas_ativas": 8513,
+      "empresarial": 8252,
+      "empresarial_pct": 96.9,
+      "adesao": 261,
+      "adesao_pct": 3.1,
+      "inclusoes_junho": 135,
       "inclusoes_junho_obs": "Junho+Julho/2026 (até 15/07)"
     },
     "composicao_carteira": {
-      "empresarial": 8254,
-      "empresarial_pct": 96.5,
-      "adesao": 301,
-      "adesao_pct": 3.5
+      "empresarial": 8252,
+      "empresarial_pct": 96.9,
+      "adesao": 261,
+      "adesao_pct": 3.1
     },
     "inclusoes_por_dia_junho": [
       {
+        "dia": "01/06",
+        "valor": 7
+      },
+      {
         "dia": "03/06",
-        "valor": 1
+        "valor": 2
       },
       {
         "dia": "05/06",
@@ -633,15 +637,31 @@ const DATA = {
         "valor": 2
       },
       {
+        "dia": "19/06",
+        "valor": 1
+      },
+      {
         "dia": "20/06",
         "valor": 1
       },
       {
         "dia": "22/06",
-        "valor": 1
+        "valor": 26
+      },
+      {
+        "dia": "23/06",
+        "valor": 5
+      },
+      {
+        "dia": "24/06",
+        "valor": 18
       },
       {
         "dia": "25/06",
+        "valor": 1
+      },
+      {
+        "dia": "26/06",
         "valor": 1
       },
       {
@@ -650,19 +670,19 @@ const DATA = {
       },
       {
         "dia": "30/06",
-        "valor": 3
+        "valor": 22
       },
       {
         "dia": "01/07",
-        "valor": 1
+        "valor": 9
       },
       {
         "dia": "02/07",
-        "valor": 1
+        "valor": 2
       },
       {
         "dia": "06/07",
-        "valor": 1
+        "valor": 2
       },
       {
         "dia": "08/07",
@@ -686,17 +706,13 @@ const DATA = {
       },
       {
         "dia": "15/07",
-        "valor": 2
+        "valor": 6
       }
     ],
     "destaques_periodo": [
       {
-        "data": "09/06 e 12/06",
-        "texto": "Maior volume de adesões em junho/2026: 5 inclusões cada"
-      },
-      {
-        "data": "01/07 a 15/07",
-        "texto": "Julho acelerou nas adesões: 15 inclusões Adesão até 15/07, com pico de 4 em 10/07; Empresarial soma 15 inclusões no mês (Marso e Confier lideram)"
+        "data": "Acompanhamento Mensal",
+        "texto": "Inclusões no período de Junho+Julho: 135 vidas registradas."
       }
     ],
     "inclusoes_por_mes_tipo": {
@@ -711,14 +727,14 @@ const DATA = {
       ],
       "adesao": [
         72,
-        32,
+        31,
         42,
         39,
         44,
         29,
         15
       ],
-      "adesao_total": 273,
+      "adesao_total": 272,
       "empresarial": [
         26,
         19,
@@ -726,19 +742,19 @@ const DATA = {
         55,
         1076,
         77,
-        15
+        14
       ],
-      "empresarial_total": 1310,
+      "empresarial_total": 1309,
       "total": [
         98,
-        51,
+        50,
         84,
         94,
         1120,
         106,
-        30
+        29
       ],
-      "total_geral": 1583
+      "total_geral": 1581
     },
     "valores_inclusoes_por_mes_tipo": {
       "meses": [
@@ -752,14 +768,14 @@ const DATA = {
       ],
       "adesao": [
         1550.4,
-        777.4,
+        747.5,
         946.9,
         1247.0,
         1043.3,
         965.8,
         458.9
       ],
-      "adesao_total": 6989.7,
+      "adesao_total": 6959.8,
       "empresarial": [
         439.7,
         319.5,
@@ -772,14 +788,14 @@ const DATA = {
       "empresarial_total": 5483.4,
       "total": [
         1990.1,
-        1096.9,
+        1067.0,
         1632.4,
         2064.5,
         3104.4,
         1829.0,
         755.8
       ],
-      "total_geral": 12473.1
+      "total_geral": 12443.2
     },
     "vendas_adesao_por_produto": {
       "meses": [
@@ -793,20 +809,20 @@ const DATA = {
       ],
       "produtos": [
         {
-          "produto": "Saúde na Tela",
+          "produto": "SAÚDE NA TELA",
           "valores": [
             59,
-            30,
+            29,
             27,
             27,
             21,
             16,
             7
           ],
-          "total": 187
+          "total": 186
         },
         {
-          "produto": "Saúde Todos",
+          "produto": "SAÚDE TODOS",
           "valores": [
             10,
             2,
@@ -819,20 +835,7 @@ const DATA = {
           "total": 79
         },
         {
-          "produto": "Doutor Hoje Premium",
-          "valores": [
-            0,
-            0,
-            0,
-            1,
-            0,
-            1,
-            0
-          ],
-          "total": 2
-        },
-        {
-          "produto": "Saúde Total + Odonto",
+          "produto": "SAÚDE TOTAL+ODONTO",
           "valores": [
             1,
             0,
@@ -845,7 +848,20 @@ const DATA = {
           "total": 2
         },
         {
-          "produto": "DR. Online",
+          "produto": "DOUTOR HOJE PREMIUM",
+          "valores": [
+            0,
+            0,
+            0,
+            1,
+            0,
+            1,
+            0
+          ],
+          "total": 2
+        },
+        {
+          "produto": "DR. ONLINE",
           "valores": [
             0,
             0,
@@ -858,7 +874,7 @@ const DATA = {
           "total": 1
         },
         {
-          "produto": "Saúde na Tela + Odonto",
+          "produto": "SAÚDE NA TELA + ODONTO",
           "valores": [
             1,
             0,
@@ -871,7 +887,7 @@ const DATA = {
           "total": 1
         },
         {
-          "produto": "Total",
+          "produto": "TOTAL",
           "valores": [
             1,
             0,
@@ -886,27 +902,27 @@ const DATA = {
       ],
       "total": [
         72,
-        32,
+        31,
         42,
         39,
         44,
         29,
         15
       ],
-      "total_geral": 273
+      "total_geral": 272
     },
     "ranking_vendas": [
       {
         "posicao": 1,
-        "produto": "Saúde na Tela",
-        "vidas": 187,
-        "pct": 68.5
+        "produto": "SAÚDE NA TELA",
+        "vidas": 186,
+        "pct": 68.4
       },
       {
         "posicao": 2,
-        "produto": "Saúde Todos",
+        "produto": "SAÚDE TODOS",
         "vidas": 79,
-        "pct": 28.9
+        "pct": 29.0
       },
       {
         "posicao": 3,
@@ -919,94 +935,87 @@ const DATA = {
       "mes": "Janeiro",
       "inclusoes": 72
     },
-    "media_mensal": 39.0,
-    "acumulado_2026": 273,
+    "media_mensal": 38.9,
+    "acumulado_2026": 272,
     "vendas_por_consultor": [
       {
         "consultor": "Venda Direta (Site)",
-        "vendas": 243,
+        "vendas": 242,
         "pct": 89.0
       },
       {
-        "consultor": "Samuel Henrique Alves De Souza",
+        "consultor": "SAMUEL HENRIQUE ALVES DE SOUZA",
         "vendas": 26,
-        "pct": 9.5
+        "pct": 9.6
       },
       {
-        "consultor": "Bianca Teixeira Da Silva",
+        "consultor": "BIANCA TEIXEIRA DA SILVA",
         "vendas": 4,
         "pct": 1.5
       }
     ],
-    "vendas_por_consultor_total": 273,
+    "vendas_por_consultor_total": 272,
     "inclusoes_junho_por_consultor": {
       "mes_ref": "Junho+Julho/2026 (até 15/07)",
       "itens": [
         {
-          "consultor": "Economia Seguros",
+          "consultor": "ECONOMIA SEGUROS",
           "tipo": "EMPRESARIAL",
           "inclusoes": 47,
-          "pct": 34.6,
+          "pct": 34.8,
           "valor": 314.9
         },
         {
           "consultor": "Venda Direta (Site)",
           "tipo": "ADESÃO",
           "inclusoes": 35,
-          "pct": 25.7,
+          "pct": 25.9,
           "valor": 1053.2
         },
         {
-          "consultor": "Confier Corretora De Seguros",
+          "consultor": "CONFIER CORRETORA DE SEGUROS",
           "tipo": "EMPRESARIAL",
           "inclusoes": 23,
-          "pct": 16.9,
+          "pct": 17.0,
           "valor": 432.4
         },
         {
-          "consultor": "Marso Corretora De Seguros Ltda",
+          "consultor": "MARSO CORRETORA DE SEGUROS LTDA",
           "tipo": "EMPRESARIAL",
           "inclusoes": 15,
-          "pct": 11.0,
+          "pct": 11.1,
           "valor": 327.0
         },
         {
-          "consultor": "Samuel Henrique Alves De Souza",
+          "consultor": "SAMUEL HENRIQUE ALVES DE SOUZA",
           "tipo": "ADESÃO",
           "inclusoes": 5,
           "pct": 3.7,
           "valor": 281.7
         },
         {
-          "consultor": "Bianca Teixeira Da Silva",
+          "consultor": "BIANCA TEIXEIRA DA SILVA",
           "tipo": "ADESÃO",
           "inclusoes": 4,
-          "pct": 2.9,
+          "pct": 3.0,
           "valor": 89.8
         },
         {
-          "consultor": "Fabricio Anunciato",
+          "consultor": "FABRICIO ANUNCIATO",
           "tipo": "EMPRESARIAL",
           "inclusoes": 4,
-          "pct": 2.9,
+          "pct": 3.0,
           "valor": 34.8
         },
         {
-          "consultor": "Facil Seguros E Saude Corretora Ltda",
+          "consultor": "FACIL SEGUROS E SAUDE CORRETORA LTDA",
           "tipo": "EMPRESARIAL",
           "inclusoes": 2,
           "pct": 1.5,
           "valor": 51.0
-        },
-        {
-          "consultor": "Silvania Vieira",
-          "tipo": "EMPRESARIAL",
-          "inclusoes": 1,
-          "pct": 0.7,
-          "valor": 0.0
         }
       ],
-      "total": 136,
+      "total": 135,
       "valor_total": 2584.8
     },
     "inclusoes_junho_detalhe": {
@@ -1114,23 +1123,23 @@ const DATA = {
         {
           "tipo": "ADESÃO",
           "vigencia": "05/06/2026",
-          "contratante": "FERNANDO LIMA DA SILVA",
-          "consultor": "null",
-          "tipo_descricao": "SAÚDE NA TELA",
-          "tipo_beneficiario": "TITULAR",
-          "beneficiario": "FERNANDO LIMA DA SILVA",
-          "cpf_cnpj": "085.223.795-21",
-          "valor": 33.9
-        },
-        {
-          "tipo": "ADESÃO",
-          "vigencia": "05/06/2026",
           "contratante": "RIAN ALVES DE MIRANDA",
           "consultor": "null",
           "tipo_descricao": "SAÚDE NA TELA",
           "tipo_beneficiario": "TITULAR",
           "beneficiario": "RIAN ALVES DE MIRANDA",
           "cpf_cnpj": "701.632.996-84",
+          "valor": 33.9
+        },
+        {
+          "tipo": "ADESÃO",
+          "vigencia": "05/06/2026",
+          "contratante": "FERNANDO LIMA DA SILVA",
+          "consultor": "null",
+          "tipo_descricao": "SAÚDE NA TELA",
+          "tipo_beneficiario": "TITULAR",
+          "beneficiario": "FERNANDO LIMA DA SILVA",
+          "cpf_cnpj": "085.223.795-21",
           "valor": 33.9
         },
         {
@@ -1147,6 +1156,17 @@ const DATA = {
         {
           "tipo": "ADESÃO",
           "vigencia": "08/06/2026",
+          "contratante": "MARCELO LUAN ALVES DE SOUZA",
+          "consultor": "null",
+          "tipo_descricao": "SAÚDE NA TELA",
+          "tipo_beneficiario": "TITULAR",
+          "beneficiario": "MARCELO LUAN ALVES DE SOUZA",
+          "cpf_cnpj": "064.848.051-80",
+          "valor": 33.9
+        },
+        {
+          "tipo": "ADESÃO",
+          "vigencia": "08/06/2026",
           "contratante": "GEOVANNA MELLO BARBOSA",
           "consultor": "null",
           "tipo_descricao": "SAÚDE NA TELA",
@@ -1157,14 +1177,36 @@ const DATA = {
         },
         {
           "tipo": "ADESÃO",
-          "vigencia": "08/06/2026",
-          "contratante": "MARCELO LUAN ALVES DE SOUZA",
+          "vigencia": "09/06/2026",
+          "contratante": "WESLEY SANTOS PEREIRA",
           "consultor": "null",
           "tipo_descricao": "SAÚDE NA TELA",
           "tipo_beneficiario": "TITULAR",
-          "beneficiario": "MARCELO LUAN ALVES DE SOUZA",
-          "cpf_cnpj": "064.848.051-80",
+          "beneficiario": "WESLEY SANTOS PEREIRA",
+          "cpf_cnpj": "149.251.236-29",
           "valor": 33.9
+        },
+        {
+          "tipo": "ADESÃO",
+          "vigencia": "09/06/2026",
+          "contratante": "GABRIEL ALVES SOUSA",
+          "consultor": "null",
+          "tipo_descricao": "SAÚDE NA TELA",
+          "tipo_beneficiario": "TITULAR",
+          "beneficiario": "GABRIEL ALVES SOUSA",
+          "cpf_cnpj": "057.004.601-73",
+          "valor": 33.9
+        },
+        {
+          "tipo": "ADESÃO",
+          "vigencia": "09/06/2026",
+          "contratante": "GLENDA PAMELA DA SILVA LIMA",
+          "consultor": "null",
+          "tipo_descricao": "SAÚDE TODOS",
+          "tipo_beneficiario": "TITULAR",
+          "beneficiario": "GLENDA PAMELA DA SILVA LIMA",
+          "cpf_cnpj": "052.510.391-07",
+          "valor": 55.9
         },
         {
           "tipo": "ADESÃO",
@@ -1190,36 +1232,25 @@ const DATA = {
         },
         {
           "tipo": "ADESÃO",
-          "vigencia": "09/06/2026",
-          "contratante": "GLENDA PAMELA DA SILVA LIMA",
+          "vigencia": "12/06/2026",
+          "contratante": "ANTONIO RODRIGUES TEIXEIRA",
+          "consultor": "null",
+          "tipo_descricao": "SAÚDE NA TELA",
+          "tipo_beneficiario": "TITULAR",
+          "beneficiario": "ANTONIO RODRIGUES TEIXEIRA",
+          "cpf_cnpj": "547.388.657-49",
+          "valor": 33.9
+        },
+        {
+          "tipo": "ADESÃO",
+          "vigencia": "12/06/2026",
+          "contratante": "IGOR MANOEL DA CUNHA",
           "consultor": "null",
           "tipo_descricao": "SAÚDE TODOS",
           "tipo_beneficiario": "TITULAR",
-          "beneficiario": "GLENDA PAMELA DA SILVA LIMA",
-          "cpf_cnpj": "052.510.391-07",
+          "beneficiario": "IGOR MANOEL DA CUNHA",
+          "cpf_cnpj": "418.718.139-30",
           "valor": 55.9
-        },
-        {
-          "tipo": "ADESÃO",
-          "vigencia": "09/06/2026",
-          "contratante": "GABRIEL ALVES SOUSA",
-          "consultor": "null",
-          "tipo_descricao": "SAÚDE NA TELA",
-          "tipo_beneficiario": "TITULAR",
-          "beneficiario": "GABRIEL ALVES SOUSA",
-          "cpf_cnpj": "057.004.601-73",
-          "valor": 33.9
-        },
-        {
-          "tipo": "ADESÃO",
-          "vigencia": "09/06/2026",
-          "contratante": "WESLEY SANTOS PEREIRA",
-          "consultor": "null",
-          "tipo_descricao": "SAÚDE NA TELA",
-          "tipo_beneficiario": "TITULAR",
-          "beneficiario": "WESLEY SANTOS PEREIRA",
-          "cpf_cnpj": "149.251.236-29",
-          "valor": 33.9
         },
         {
           "tipo": "ADESÃO",
@@ -1227,10 +1258,10 @@ const DATA = {
           "contratante": "GABRIELA SOUSA FERREIRA",
           "consultor": "BIANCA TEIXEIRA DA SILVA",
           "tipo_descricao": "SAÚDE TODOS",
-          "tipo_beneficiario": "DEPENDENTE",
-          "beneficiario": "BEATRIZ FERREIRA DE ANDRADE",
-          "cpf_cnpj": "110.855.021-55",
-          "valor": 0.0
+          "tipo_beneficiario": "TITULAR",
+          "beneficiario": "GABRIELA SOUSA FERREIRA",
+          "cpf_cnpj": "720.198.241-91",
+          "valor": 55.9
         },
         {
           "tipo": "ADESÃO",
@@ -1249,32 +1280,10 @@ const DATA = {
           "contratante": "GABRIELA SOUSA FERREIRA",
           "consultor": "BIANCA TEIXEIRA DA SILVA",
           "tipo_descricao": "SAÚDE TODOS",
-          "tipo_beneficiario": "TITULAR",
-          "beneficiario": "GABRIELA SOUSA FERREIRA",
-          "cpf_cnpj": "720.198.241-91",
-          "valor": 55.9
-        },
-        {
-          "tipo": "ADESÃO",
-          "vigencia": "12/06/2026",
-          "contratante": "IGOR MANOEL DA CUNHA",
-          "consultor": "null",
-          "tipo_descricao": "SAÚDE TODOS",
-          "tipo_beneficiario": "TITULAR",
-          "beneficiario": "IGOR MANOEL DA CUNHA",
-          "cpf_cnpj": "418.718.139-30",
-          "valor": 55.9
-        },
-        {
-          "tipo": "ADESÃO",
-          "vigencia": "12/06/2026",
-          "contratante": "ANTONIO RODRIGUES TEIXEIRA",
-          "consultor": "null",
-          "tipo_descricao": "SAÚDE NA TELA",
-          "tipo_beneficiario": "TITULAR",
-          "beneficiario": "ANTONIO RODRIGUES TEIXEIRA",
-          "cpf_cnpj": "547.388.657-49",
-          "valor": 33.9
+          "tipo_beneficiario": "DEPENDENTE",
+          "beneficiario": "BEATRIZ FERREIRA DE ANDRADE",
+          "cpf_cnpj": "110.855.021-55",
+          "valor": 0.0
         },
         {
           "tipo": "ADESÃO",
@@ -1325,22 +1334,22 @@ const DATA = {
           "vigencia": "18/06/2026",
           "contratante": "DALILA ALVES MOURA",
           "consultor": "SAMUEL HENRIQUE ALVES DE SOUZA",
-          "tipo_descricao": "DOUTOR HOJE PREMIUM",
+          "tipo_descricao": "SAÚDE TOTAL+ODONTO",
           "tipo_beneficiario": "TITULAR",
           "beneficiario": "DALILA ALVES MOURA",
           "cpf_cnpj": "076.876.296-04",
-          "valor": 120.0
+          "valor": 49.9
         },
         {
           "tipo": "ADESÃO",
           "vigencia": "18/06/2026",
           "contratante": "DALILA ALVES MOURA",
           "consultor": "SAMUEL HENRIQUE ALVES DE SOUZA",
-          "tipo_descricao": "SAÚDE TOTAL+ODONTO",
+          "tipo_descricao": "DOUTOR HOJE PREMIUM",
           "tipo_beneficiario": "TITULAR",
           "beneficiario": "DALILA ALVES MOURA",
           "cpf_cnpj": "076.876.296-04",
-          "valor": 49.9
+          "valor": 120.0
         },
         {
           "tipo": "EMPRESARIAL",
@@ -1363,72 +1372,6 @@ const DATA = {
           "beneficiario": "MICKERLINE JN LOUIS",
           "cpf_cnpj": "090.258.941-51",
           "valor": 33.9
-        },
-        {
-          "tipo": "EMPRESARIAL",
-          "vigencia": "22/06/2026",
-          "contratante": "CID PRODUTOS MEDICOS",
-          "consultor": "ECONOMIA SEGUROS",
-          "tipo_descricao": "DR. ONLINE",
-          "tipo_beneficiario": "TITULAR",
-          "beneficiario": "DHEMERSON LIMA DOS SANTOS",
-          "cpf_cnpj": "060.800.755-20",
-          "valor": 6.7
-        },
-        {
-          "tipo": "EMPRESARIAL",
-          "vigencia": "22/06/2026",
-          "contratante": "CENTRAL ENSINOS LTDA - SAÚDE SENIOR",
-          "consultor": "FABRICIO ANUNCIATO",
-          "tipo_descricao": "CONECTA SAÚDE",
-          "tipo_beneficiario": "TITULAR",
-          "beneficiario": "MARIA ANDREIA SOUZA COSTA",
-          "cpf_cnpj": "418.912.478-83",
-          "valor": 8.7
-        },
-        {
-          "tipo": "EMPRESARIAL",
-          "vigencia": "22/06/2026",
-          "contratante": "CID PRODUTOS MEDICOS",
-          "consultor": "ECONOMIA SEGUROS",
-          "tipo_descricao": "DR. ONLINE",
-          "tipo_beneficiario": "TITULAR",
-          "beneficiario": "CLEITON MARTINS MEDINA",
-          "cpf_cnpj": "069.782.871-99",
-          "valor": 6.7
-        },
-        {
-          "tipo": "EMPRESARIAL",
-          "vigencia": "22/06/2026",
-          "contratante": "CID PRODUTOS MEDICOS",
-          "consultor": "ECONOMIA SEGUROS",
-          "tipo_descricao": "DR. ONLINE",
-          "tipo_beneficiario": "TITULAR",
-          "beneficiario": "JONNIO FABIA PEREIRA DE SOUSA",
-          "cpf_cnpj": "093.632.931-90",
-          "valor": 6.7
-        },
-        {
-          "tipo": "ADESÃO",
-          "vigencia": "22/06/2026",
-          "contratante": "JOAO LUCAS GOMES SILVA",
-          "consultor": "null",
-          "tipo_descricao": "SAÚDE NA TELA",
-          "tipo_beneficiario": "TITULAR",
-          "beneficiario": "JOAO LUCAS GOMES SILVA",
-          "cpf_cnpj": "120.320.616-00",
-          "valor": 33.9
-        },
-        {
-          "tipo": "EMPRESARIAL",
-          "vigencia": "22/06/2026",
-          "contratante": "CID PRODUTOS MEDICOS",
-          "consultor": "ECONOMIA SEGUROS",
-          "tipo_descricao": "DR. ONLINE",
-          "tipo_beneficiario": "TITULAR",
-          "beneficiario": "MICHELE DE JESUS SOUZA",
-          "cpf_cnpj": "093.522.193-09",
-          "valor": 6.7
         },
         {
           "tipo": "EMPRESARIAL",
@@ -1613,6 +1556,17 @@ const DATA = {
           "consultor": "ECONOMIA SEGUROS",
           "tipo_descricao": "DR. ONLINE",
           "tipo_beneficiario": "TITULAR",
+          "beneficiario": "LOANY PAZ BARBOSA",
+          "cpf_cnpj": "088.548.611-03",
+          "valor": 6.7
+        },
+        {
+          "tipo": "EMPRESARIAL",
+          "vigencia": "22/06/2026",
+          "contratante": "CID PRODUTOS MEDICOS",
+          "consultor": "ECONOMIA SEGUROS",
+          "tipo_descricao": "DR. ONLINE",
+          "tipo_beneficiario": "TITULAR",
           "beneficiario": "LEANDRO PEREIRA DE SOUZA FERREIRA",
           "cpf_cnpj": "059.313.671-36",
           "valor": 6.7
@@ -1635,6 +1589,17 @@ const DATA = {
           "consultor": "ECONOMIA SEGUROS",
           "tipo_descricao": "DR. ONLINE",
           "tipo_beneficiario": "TITULAR",
+          "beneficiario": "MICHELE DE JESUS SOUZA",
+          "cpf_cnpj": "093.522.193-09",
+          "valor": 6.7
+        },
+        {
+          "tipo": "EMPRESARIAL",
+          "vigencia": "22/06/2026",
+          "contratante": "CID PRODUTOS MEDICOS",
+          "consultor": "ECONOMIA SEGUROS",
+          "tipo_descricao": "DR. ONLINE",
+          "tipo_beneficiario": "TITULAR",
           "beneficiario": "ALEXANDRE SANTOS COUTO",
           "cpf_cnpj": "058.249.841-40",
           "valor": 6.7
@@ -1646,9 +1611,53 @@ const DATA = {
           "consultor": "ECONOMIA SEGUROS",
           "tipo_descricao": "DR. ONLINE",
           "tipo_beneficiario": "TITULAR",
-          "beneficiario": "LOANY PAZ BARBOSA",
-          "cpf_cnpj": "088.548.611-03",
+          "beneficiario": "JONNIO FABIA PEREIRA DE SOUSA",
+          "cpf_cnpj": "093.632.931-90",
           "valor": 6.7
+        },
+        {
+          "tipo": "EMPRESARIAL",
+          "vigencia": "22/06/2026",
+          "contratante": "CID PRODUTOS MEDICOS",
+          "consultor": "ECONOMIA SEGUROS",
+          "tipo_descricao": "DR. ONLINE",
+          "tipo_beneficiario": "TITULAR",
+          "beneficiario": "DHEMERSON LIMA DOS SANTOS",
+          "cpf_cnpj": "060.800.755-20",
+          "valor": 6.7
+        },
+        {
+          "tipo": "EMPRESARIAL",
+          "vigencia": "22/06/2026",
+          "contratante": "CID PRODUTOS MEDICOS",
+          "consultor": "ECONOMIA SEGUROS",
+          "tipo_descricao": "DR. ONLINE",
+          "tipo_beneficiario": "TITULAR",
+          "beneficiario": "CLEITON MARTINS MEDINA",
+          "cpf_cnpj": "069.782.871-99",
+          "valor": 6.7
+        },
+        {
+          "tipo": "EMPRESARIAL",
+          "vigencia": "22/06/2026",
+          "contratante": "CENTRAL ENSINOS LTDA - SAÚDE SENIOR",
+          "consultor": "FABRICIO ANUNCIATO",
+          "tipo_descricao": "CONECTA SAÚDE",
+          "tipo_beneficiario": "TITULAR",
+          "beneficiario": "MARIA ANDREIA SOUZA COSTA",
+          "cpf_cnpj": "418.912.478-83",
+          "valor": 8.7
+        },
+        {
+          "tipo": "ADESÃO",
+          "vigencia": "22/06/2026",
+          "contratante": "JOAO LUCAS GOMES SILVA",
+          "consultor": "null",
+          "tipo_descricao": "SAÚDE NA TELA",
+          "tipo_beneficiario": "TITULAR",
+          "beneficiario": "JOAO LUCAS GOMES SILVA",
+          "cpf_cnpj": "120.320.616-00",
+          "valor": 33.9
         },
         {
           "tipo": "EMPRESARIAL",
@@ -1657,30 +1666,8 @@ const DATA = {
           "consultor": "ECONOMIA SEGUROS",
           "tipo_descricao": "DR. ONLINE",
           "tipo_beneficiario": "TITULAR",
-          "beneficiario": "CARLOS ANTONIO FERREIRA DA SILVA",
-          "cpf_cnpj": "828.603.431-72",
-          "valor": 6.7
-        },
-        {
-          "tipo": "EMPRESARIAL",
-          "vigencia": "23/06/2026",
-          "contratante": "CID PRODUTOS MEDICOS",
-          "consultor": "ECONOMIA SEGUROS",
-          "tipo_descricao": "DR. ONLINE",
-          "tipo_beneficiario": "TITULAR",
-          "beneficiario": "LEANDRA BRITO SILVA",
-          "cpf_cnpj": "080.473.851-35",
-          "valor": 6.7
-        },
-        {
-          "tipo": "EMPRESARIAL",
-          "vigencia": "23/06/2026",
-          "contratante": "CID PRODUTOS MEDICOS",
-          "consultor": "ECONOMIA SEGUROS",
-          "tipo_descricao": "DR. ONLINE",
-          "tipo_beneficiario": "TITULAR",
-          "beneficiario": "ALANA VITORIA RIBEIRO AMARAL",
-          "cpf_cnpj": "090.373.991-77",
+          "beneficiario": "JOÃO PEDRO DOS SANTOS LOURENÇO",
+          "cpf_cnpj": "094.064.801-66",
           "valor": 6.7
         },
         {
@@ -1701,30 +1688,30 @@ const DATA = {
           "consultor": "ECONOMIA SEGUROS",
           "tipo_descricao": "DR. ONLINE",
           "tipo_beneficiario": "TITULAR",
-          "beneficiario": "JOÃO PEDRO DOS SANTOS LOURENÇO",
-          "cpf_cnpj": "094.064.801-66",
+          "beneficiario": "ALANA VITORIA RIBEIRO AMARAL",
+          "cpf_cnpj": "090.373.991-77",
           "valor": 6.7
         },
         {
           "tipo": "EMPRESARIAL",
-          "vigencia": "24/06/2026",
+          "vigencia": "23/06/2026",
           "contratante": "CID PRODUTOS MEDICOS",
           "consultor": "ECONOMIA SEGUROS",
           "tipo_descricao": "DR. ONLINE",
           "tipo_beneficiario": "TITULAR",
-          "beneficiario": "NAIANE COSTA SALES",
-          "cpf_cnpj": "608.656.583-07",
+          "beneficiario": "LEANDRA BRITO SILVA",
+          "cpf_cnpj": "080.473.851-35",
           "valor": 6.7
         },
         {
           "tipo": "EMPRESARIAL",
-          "vigencia": "24/06/2026",
+          "vigencia": "23/06/2026",
           "contratante": "CID PRODUTOS MEDICOS",
           "consultor": "ECONOMIA SEGUROS",
           "tipo_descricao": "DR. ONLINE",
           "tipo_beneficiario": "TITULAR",
-          "beneficiario": "TERESA VANESSA NASCIMENTO ALMEIDA",
-          "cpf_cnpj": "707.714.601-47",
+          "beneficiario": "CARLOS ANTONIO FERREIRA DA SILVA",
+          "cpf_cnpj": "828.603.431-72",
           "valor": 6.7
         },
         {
@@ -1877,6 +1864,17 @@ const DATA = {
           "consultor": "ECONOMIA SEGUROS",
           "tipo_descricao": "DR. ONLINE",
           "tipo_beneficiario": "TITULAR",
+          "beneficiario": "NAIANE COSTA SALES",
+          "cpf_cnpj": "608.656.583-07",
+          "valor": 6.7
+        },
+        {
+          "tipo": "EMPRESARIAL",
+          "vigencia": "24/06/2026",
+          "contratante": "CID PRODUTOS MEDICOS",
+          "consultor": "ECONOMIA SEGUROS",
+          "tipo_descricao": "DR. ONLINE",
+          "tipo_beneficiario": "TITULAR",
           "beneficiario": "SUEIDE COSTA DA SILVA",
           "cpf_cnpj": "048.315.521-78",
           "valor": 6.7
@@ -1888,8 +1886,8 @@ const DATA = {
           "consultor": "ECONOMIA SEGUROS",
           "tipo_descricao": "DR. ONLINE",
           "tipo_beneficiario": "TITULAR",
-          "beneficiario": "THAUANY FRANCISCO NERI",
-          "cpf_cnpj": "093.183.101-61",
+          "beneficiario": "MARIA DE JESUS BARBOSA SAMPIO",
+          "cpf_cnpj": "056.319.481-25",
           "valor": 6.7
         },
         {
@@ -1899,8 +1897,19 @@ const DATA = {
           "consultor": "ECONOMIA SEGUROS",
           "tipo_descricao": "DR. ONLINE",
           "tipo_beneficiario": "TITULAR",
-          "beneficiario": "MARIA DE JESUS BARBOSA SAMPIO",
-          "cpf_cnpj": "056.319.481-25",
+          "beneficiario": "TERESA VANESSA NASCIMENTO ALMEIDA",
+          "cpf_cnpj": "707.714.601-47",
+          "valor": 6.7
+        },
+        {
+          "tipo": "EMPRESARIAL",
+          "vigencia": "24/06/2026",
+          "contratante": "CID PRODUTOS MEDICOS",
+          "consultor": "ECONOMIA SEGUROS",
+          "tipo_descricao": "DR. ONLINE",
+          "tipo_beneficiario": "TITULAR",
+          "beneficiario": "THAUANY FRANCISCO NERI",
+          "cpf_cnpj": "093.183.101-61",
           "valor": 6.7
         },
         {
@@ -1943,8 +1952,8 @@ const DATA = {
           "consultor": "CONFIER CORRETORA DE SEGUROS",
           "tipo_descricao": "DOUTOR HOJE MAIS",
           "tipo_beneficiario": "TITULAR",
-          "beneficiario": "PAULO HENRIQUE GONCALVES SABINO",
-          "cpf_cnpj": "059.859.461-26",
+          "beneficiario": "SHIRLEY MARIA RODRIGUES ARAUJO",
+          "cpf_cnpj": "054.561.601-88",
           "valor": 18.8
         },
         {
@@ -1954,8 +1963,8 @@ const DATA = {
           "consultor": "CONFIER CORRETORA DE SEGUROS",
           "tipo_descricao": "DOUTOR HOJE MAIS",
           "tipo_beneficiario": "TITULAR",
-          "beneficiario": "SHIRLEY MARIA RODRIGUES ARAUJO",
-          "cpf_cnpj": "054.561.601-88",
+          "beneficiario": "DOMINIK SANTOS FERREIRA",
+          "cpf_cnpj": "714.112.621-07",
           "valor": 18.8
         },
         {
@@ -2009,8 +2018,8 @@ const DATA = {
           "consultor": "CONFIER CORRETORA DE SEGUROS",
           "tipo_descricao": "DOUTOR HOJE MAIS",
           "tipo_beneficiario": "TITULAR",
-          "beneficiario": "LUCAS PINHEIRO VERAS",
-          "cpf_cnpj": "103.334.531-82",
+          "beneficiario": "DOMINGOS ANDRE ANDRADE FREIRE",
+          "cpf_cnpj": "061.921.563-10",
           "valor": 18.8
         },
         {
@@ -2053,8 +2062,8 @@ const DATA = {
           "consultor": "CONFIER CORRETORA DE SEGUROS",
           "tipo_descricao": "DOUTOR HOJE MAIS",
           "tipo_beneficiario": "TITULAR",
-          "beneficiario": "DOMINGOS ANDRE ANDRADE FREIRE",
-          "cpf_cnpj": "061.921.563-10",
+          "beneficiario": "LAISI SILVA FERREIRA",
+          "cpf_cnpj": "083.327.561-54",
           "valor": 18.8
         },
         {
@@ -2075,8 +2084,52 @@ const DATA = {
           "consultor": "CONFIER CORRETORA DE SEGUROS",
           "tipo_descricao": "DOUTOR HOJE MAIS",
           "tipo_beneficiario": "TITULAR",
-          "beneficiario": "LAISI SILVA FERREIRA",
-          "cpf_cnpj": "083.327.561-54",
+          "beneficiario": "LUCAS ALVES XAVIER",
+          "cpf_cnpj": "096.930.381-50",
+          "valor": 18.8
+        },
+        {
+          "tipo": "EMPRESARIAL",
+          "vigencia": "30/06/2026",
+          "contratante": "DISDAL DISTRIBUIDORA",
+          "consultor": "CONFIER CORRETORA DE SEGUROS",
+          "tipo_descricao": "DOUTOR HOJE MAIS",
+          "tipo_beneficiario": "TITULAR",
+          "beneficiario": "LUCAS BRAIAN DOS SANTOS RODRIGUES BISPO",
+          "cpf_cnpj": "049.030.971-29",
+          "valor": 18.8
+        },
+        {
+          "tipo": "EMPRESARIAL",
+          "vigencia": "30/06/2026",
+          "contratante": "DISDAL DISTRIBUIDORA",
+          "consultor": "CONFIER CORRETORA DE SEGUROS",
+          "tipo_descricao": "DOUTOR HOJE MAIS",
+          "tipo_beneficiario": "TITULAR",
+          "beneficiario": "LUCAS PINHEIRO VERAS",
+          "cpf_cnpj": "103.334.531-82",
+          "valor": 18.8
+        },
+        {
+          "tipo": "EMPRESARIAL",
+          "vigencia": "30/06/2026",
+          "contratante": "DISDAL DISTRIBUIDORA",
+          "consultor": "CONFIER CORRETORA DE SEGUROS",
+          "tipo_descricao": "DOUTOR HOJE MAIS",
+          "tipo_beneficiario": "TITULAR",
+          "beneficiario": "PAULO HENRIQUE GONCALVES SABINO",
+          "cpf_cnpj": "059.859.461-26",
+          "valor": 18.8
+        },
+        {
+          "tipo": "EMPRESARIAL",
+          "vigencia": "30/06/2026",
+          "contratante": "DISDAL DISTRIBUIDORA",
+          "consultor": "CONFIER CORRETORA DE SEGUROS",
+          "tipo_descricao": "DOUTOR HOJE MAIS",
+          "tipo_beneficiario": "TITULAR",
+          "beneficiario": "TAINARA PEREIRA SALES",
+          "cpf_cnpj": "063.336.191-75",
           "valor": 18.8
         },
         {
@@ -2113,26 +2166,15 @@ const DATA = {
           "valor": 0.0
         },
         {
-          "tipo": "EMPRESARIAL",
+          "tipo": "ADESÃO",
           "vigencia": "30/06/2026",
-          "contratante": "DISDAL DISTRIBUIDORA",
-          "consultor": "CONFIER CORRETORA DE SEGUROS",
-          "tipo_descricao": "DOUTOR HOJE MAIS",
+          "contratante": "MARCOS MENEZES DE SOUZA E SILVA",
+          "consultor": "null",
+          "tipo_descricao": "SAÚDE TODOS",
           "tipo_beneficiario": "TITULAR",
-          "beneficiario": "TAINARA PEREIRA SALES",
-          "cpf_cnpj": "063.336.191-75",
-          "valor": 18.8
-        },
-        {
-          "tipo": "EMPRESARIAL",
-          "vigencia": "30/06/2026",
-          "contratante": "DISDAL DISTRIBUIDORA",
-          "consultor": "CONFIER CORRETORA DE SEGUROS",
-          "tipo_descricao": "DOUTOR HOJE MAIS",
-          "tipo_beneficiario": "TITULAR",
-          "beneficiario": "LUCAS BRAIAN DOS SANTOS RODRIGUES BISPO",
-          "cpf_cnpj": "049.030.971-29",
-          "valor": 18.8
+          "beneficiario": "MARCOS MENEZES DE SOUZA E SILVA",
+          "cpf_cnpj": "027.682.691-40",
+          "valor": 29.9
         },
         {
           "tipo": "ADESÃO",
@@ -2147,112 +2189,13 @@ const DATA = {
         },
         {
           "tipo": "EMPRESARIAL",
-          "vigencia": "30/06/2026",
-          "contratante": "DISDAL DISTRIBUIDORA",
-          "consultor": "CONFIER CORRETORA DE SEGUROS",
-          "tipo_descricao": "DOUTOR HOJE MAIS",
-          "tipo_beneficiario": "TITULAR",
-          "beneficiario": "LUCAS ALVES XAVIER",
-          "cpf_cnpj": "096.930.381-50",
-          "valor": 18.8
-        },
-        {
-          "tipo": "ADESÃO",
-          "vigencia": "30/06/2026",
-          "contratante": "MARCOS MENEZES DE SOUZA E SILVA",
-          "consultor": "null",
-          "tipo_descricao": "SAÚDE TODOS",
-          "tipo_beneficiario": "TITULAR",
-          "beneficiario": "MARCOS MENEZES DE SOUZA E SILVA",
-          "cpf_cnpj": "027.682.691-40",
-          "valor": 29.9
-        },
-        {
-          "tipo": "EMPRESARIAL",
-          "vigencia": "30/06/2026",
-          "contratante": "DISDAL DISTRIBUIDORA",
-          "consultor": "CONFIER CORRETORA DE SEGUROS",
-          "tipo_descricao": "DOUTOR HOJE MAIS",
-          "tipo_beneficiario": "TITULAR",
-          "beneficiario": "DOMINIK SANTOS FERREIRA",
-          "cpf_cnpj": "714.112.621-07",
-          "valor": 18.8
-        },
-        {
-          "tipo": "ADESÃO",
-          "vigencia": "01/07/2026",
-          "contratante": "LUCAS DE SOUSA FIGUEIREDO",
-          "consultor": "null",
-          "tipo_descricao": "SAÚDE NA TELA",
-          "tipo_beneficiario": "TITULAR",
-          "beneficiario": "LUCAS DE SOUSA FIGUEIREDO",
-          "cpf_cnpj": "053.860.821-83",
-          "valor": 33.9
-        },
-        {
-          "tipo": "EMPRESARIAL",
           "vigencia": "01/07/2026",
           "contratante": "CDL MANAUS - CAMARA DE DIRIGENTES LOJISTAS DE MANAUS",
           "consultor": "MARSO CORRETORA DE SEGUROS LTDA",
           "tipo_descricao": "SAÚDE INTEGRAL",
           "tipo_beneficiario": "TITULAR",
-          "beneficiario": "TATIANI SOUSA DA SILVA",
-          "cpf_cnpj": "063.967.942-09",
-          "valor": 21.8
-        },
-        {
-          "tipo": "EMPRESARIAL",
-          "vigencia": "01/07/2026",
-          "contratante": "CDL MANAUS - CAMARA DE DIRIGENTES LOJISTAS DE MANAUS",
-          "consultor": "MARSO CORRETORA DE SEGUROS LTDA",
-          "tipo_descricao": "SAÚDE INTEGRAL",
-          "tipo_beneficiario": "TITULAR",
-          "beneficiario": "YASMIN SILVA SEVALHO",
-          "cpf_cnpj": "024.779.622-05",
-          "valor": 21.8
-        },
-        {
-          "tipo": "EMPRESARIAL",
-          "vigencia": "01/07/2026",
-          "contratante": "CDL MANAUS - CAMARA DE DIRIGENTES LOJISTAS DE MANAUS",
-          "consultor": "MARSO CORRETORA DE SEGUROS LTDA",
-          "tipo_descricao": "SAÚDE INTEGRAL",
-          "tipo_beneficiario": "TITULAR",
-          "beneficiario": "PAMELA GUALBERTO DA SILVA",
-          "cpf_cnpj": "006.499.072-99",
-          "valor": 21.8
-        },
-        {
-          "tipo": "EMPRESARIAL",
-          "vigencia": "01/07/2026",
-          "contratante": "CDL MANAUS - CAMARA DE DIRIGENTES LOJISTAS DE MANAUS",
-          "consultor": "MARSO CORRETORA DE SEGUROS LTDA",
-          "tipo_descricao": "SAÚDE INTEGRAL",
-          "tipo_beneficiario": "TITULAR",
-          "beneficiario": "ALINNY RODRIGUES DA SILVA",
-          "cpf_cnpj": "054.851.282-54",
-          "valor": 21.8
-        },
-        {
-          "tipo": "EMPRESARIAL",
-          "vigencia": "01/07/2026",
-          "contratante": "CDL MANAUS - CAMARA DE DIRIGENTES LOJISTAS DE MANAUS",
-          "consultor": "MARSO CORRETORA DE SEGUROS LTDA",
-          "tipo_descricao": "SAÚDE INTEGRAL",
-          "tipo_beneficiario": "TITULAR",
-          "beneficiario": "CRISTINA BEZERRA SOARES",
-          "cpf_cnpj": "705.861.192-05",
-          "valor": 21.8
-        },
-        {
-          "tipo": "EMPRESARIAL",
-          "vigencia": "01/07/2026",
-          "contratante": "CDL MANAUS - CAMARA DE DIRIGENTES LOJISTAS DE MANAUS",
-          "consultor": "MARSO CORRETORA DE SEGUROS LTDA",
-          "tipo_descricao": "SAÚDE INTEGRAL",
-          "tipo_beneficiario": "TITULAR",
-          "beneficiario": "VERA VIEIRA DE CASTRO ROCHA",
-          "cpf_cnpj": "969.708.712-15",
+          "beneficiario": "JULIANA CHRISTINA MEDEIROS DA CRUZ",
+          "cpf_cnpj": "061.764.942-14",
           "valor": 21.8
         },
         {
@@ -2273,8 +2216,85 @@ const DATA = {
           "consultor": "MARSO CORRETORA DE SEGUROS LTDA",
           "tipo_descricao": "SAÚDE INTEGRAL",
           "tipo_beneficiario": "TITULAR",
-          "beneficiario": "JULIANA CHRISTINA MEDEIROS DA CRUZ",
-          "cpf_cnpj": "061.764.942-14",
+          "beneficiario": "VERA VIEIRA DE CASTRO ROCHA",
+          "cpf_cnpj": "969.708.712-15",
+          "valor": 21.8
+        },
+        {
+          "tipo": "EMPRESARIAL",
+          "vigencia": "01/07/2026",
+          "contratante": "CDL MANAUS - CAMARA DE DIRIGENTES LOJISTAS DE MANAUS",
+          "consultor": "MARSO CORRETORA DE SEGUROS LTDA",
+          "tipo_descricao": "SAÚDE INTEGRAL",
+          "tipo_beneficiario": "TITULAR",
+          "beneficiario": "CRISTINA BEZERRA SOARES",
+          "cpf_cnpj": "705.861.192-05",
+          "valor": 21.8
+        },
+        {
+          "tipo": "EMPRESARIAL",
+          "vigencia": "01/07/2026",
+          "contratante": "CDL MANAUS - CAMARA DE DIRIGENTES LOJISTAS DE MANAUS",
+          "consultor": "MARSO CORRETORA DE SEGUROS LTDA",
+          "tipo_descricao": "SAÚDE INTEGRAL",
+          "tipo_beneficiario": "TITULAR",
+          "beneficiario": "ALINNY RODRIGUES DA SILVA",
+          "cpf_cnpj": "054.851.282-54",
+          "valor": 21.8
+        },
+        {
+          "tipo": "EMPRESARIAL",
+          "vigencia": "01/07/2026",
+          "contratante": "CDL MANAUS - CAMARA DE DIRIGENTES LOJISTAS DE MANAUS",
+          "consultor": "MARSO CORRETORA DE SEGUROS LTDA",
+          "tipo_descricao": "SAÚDE INTEGRAL",
+          "tipo_beneficiario": "TITULAR",
+          "beneficiario": "PAMELA GUALBERTO DA SILVA",
+          "cpf_cnpj": "006.499.072-99",
+          "valor": 21.8
+        },
+        {
+          "tipo": "EMPRESARIAL",
+          "vigencia": "01/07/2026",
+          "contratante": "CDL MANAUS - CAMARA DE DIRIGENTES LOJISTAS DE MANAUS",
+          "consultor": "MARSO CORRETORA DE SEGUROS LTDA",
+          "tipo_descricao": "SAÚDE INTEGRAL",
+          "tipo_beneficiario": "TITULAR",
+          "beneficiario": "YASMIN SILVA SEVALHO",
+          "cpf_cnpj": "024.779.622-05",
+          "valor": 21.8
+        },
+        {
+          "tipo": "EMPRESARIAL",
+          "vigencia": "01/07/2026",
+          "contratante": "CDL MANAUS - CAMARA DE DIRIGENTES LOJISTAS DE MANAUS",
+          "consultor": "MARSO CORRETORA DE SEGUROS LTDA",
+          "tipo_descricao": "SAÚDE INTEGRAL",
+          "tipo_beneficiario": "TITULAR",
+          "beneficiario": "TATIANI SOUSA DA SILVA",
+          "cpf_cnpj": "063.967.942-09",
+          "valor": 21.8
+        },
+        {
+          "tipo": "ADESÃO",
+          "vigencia": "01/07/2026",
+          "contratante": "LUCAS DE SOUSA FIGUEIREDO",
+          "consultor": "null",
+          "tipo_descricao": "SAÚDE NA TELA",
+          "tipo_beneficiario": "TITULAR",
+          "beneficiario": "LUCAS DE SOUSA FIGUEIREDO",
+          "cpf_cnpj": "053.860.821-83",
+          "valor": 33.9
+        },
+        {
+          "tipo": "EMPRESARIAL",
+          "vigencia": "02/07/2026",
+          "contratante": "CDL MANAUS - CAMARA DE DIRIGENTES LOJISTAS DE MANAUS",
+          "consultor": "MARSO CORRETORA DE SEGUROS LTDA",
+          "tipo_descricao": "SAÚDE INTEGRAL",
+          "tipo_beneficiario": "DEPENDENTE",
+          "beneficiario": "JHONATAN KALEL CASTRO CARVALHO",
+          "cpf_cnpj": "115.026.232-00",
           "valor": 21.8
         },
         {
@@ -2290,14 +2310,14 @@ const DATA = {
         },
         {
           "tipo": "EMPRESARIAL",
-          "vigencia": "02/07/2026",
-          "contratante": "CDL MANAUS - CAMARA DE DIRIGENTES LOJISTAS DE MANAUS",
-          "consultor": "MARSO CORRETORA DE SEGUROS LTDA",
-          "tipo_descricao": "SAÚDE INTEGRAL",
-          "tipo_beneficiario": "DEPENDENTE",
-          "beneficiario": "JHONATAN KALEL CASTRO CARVALHO",
-          "cpf_cnpj": "115.026.232-00",
-          "valor": 21.8
+          "vigencia": "06/07/2026",
+          "contratante": "SETA BRASÍLIA",
+          "consultor": "FACIL SEGUROS E SAUDE CORRETORA LTDA",
+          "tipo_descricao": "DOUTOR HOJE MAIS",
+          "tipo_beneficiario": "TITULAR",
+          "beneficiario": "RAFAEL CEZAR DE OLIVEIRA",
+          "cpf_cnpj": "031.652.201-58",
+          "valor": 25.5
         },
         {
           "tipo": "ADESÃO",
@@ -2309,17 +2329,6 @@ const DATA = {
           "beneficiario": "EDELTRUDES PEREIRA",
           "cpf_cnpj": "772.573.831-20",
           "valor": 33.9
-        },
-        {
-          "tipo": "EMPRESARIAL",
-          "vigencia": "06/07/2026",
-          "contratante": "SETA BRASÍLIA",
-          "consultor": "FACIL SEGUROS E SAUDE CORRETORA LTDA",
-          "tipo_descricao": "DOUTOR HOJE MAIS",
-          "tipo_beneficiario": "TITULAR",
-          "beneficiario": "RAFAEL CEZAR DE OLIVEIRA",
-          "cpf_cnpj": "031.652.201-58",
-          "valor": 25.5
         },
         {
           "tipo": "ADESÃO",
@@ -2390,17 +2399,6 @@ const DATA = {
         {
           "tipo": "ADESÃO",
           "vigencia": "11/07/2026",
-          "contratante": "SANDRA HILDA SENA LEAO",
-          "consultor": "null",
-          "tipo_descricao": "SAÚDE NA TELA",
-          "tipo_beneficiario": "TITULAR",
-          "beneficiario": "SANDRA HILDA SENA LEAO",
-          "cpf_cnpj": "946.701.025-91",
-          "valor": 33.9
-        },
-        {
-          "tipo": "ADESÃO",
-          "vigencia": "11/07/2026",
           "contratante": "NADJA CAMILA OLIVEIRA DE SANTANA",
           "consultor": "null",
           "tipo_descricao": "SAÚDE NA TELA",
@@ -2410,15 +2408,15 @@ const DATA = {
           "valor": 33.9
         },
         {
-          "tipo": "EMPRESARIAL",
+          "tipo": "ADESÃO",
           "vigencia": "11/07/2026",
-          "contratante": "INFOFLASH",
-          "consultor": "SILVANIA VIEIRA",
-          "tipo_descricao": "SAÚDE TODOS",
-          "tipo_beneficiario": "DEPENDENTE",
-          "beneficiario": "JULIA LOLLI",
-          "cpf_cnpj": "114.883.901-18",
-          "valor": 0.0
+          "contratante": "SANDRA HILDA SENA LEAO",
+          "consultor": "null",
+          "tipo_descricao": "SAÚDE NA TELA",
+          "tipo_beneficiario": "TITULAR",
+          "beneficiario": "SANDRA HILDA SENA LEAO",
+          "cpf_cnpj": "946.701.025-91",
+          "valor": 33.9
         },
         {
           "tipo": "ADESÃO",
@@ -2441,17 +2439,6 @@ const DATA = {
           "beneficiario": "BRUNA PROCOPIO SANTOS",
           "cpf_cnpj": "101.452.515-27",
           "valor": 33.9
-        },
-        {
-          "tipo": "EMPRESARIAL",
-          "vigencia": "15/07/2026",
-          "contratante": "RIO BRANCO PARTICIPACOES S.A",
-          "consultor": "CONFIER CORRETORA DE SEGUROS",
-          "tipo_descricao": "DOUTOR HOJE MAIS",
-          "tipo_beneficiario": "TITULAR",
-          "beneficiario": "SHIRLEY MARIA RODRIGUES ARAUJO",
-          "cpf_cnpj": "054.561.601-88",
-          "valor": 18.8
         },
         {
           "tipo": "EMPRESARIAL",
@@ -2487,6 +2474,17 @@ const DATA = {
           "valor": 18.8
         },
         {
+          "tipo": "EMPRESARIAL",
+          "vigencia": "15/07/2026",
+          "contratante": "RIO BRANCO PARTICIPACOES S.A",
+          "consultor": "CONFIER CORRETORA DE SEGUROS",
+          "tipo_descricao": "DOUTOR HOJE MAIS",
+          "tipo_beneficiario": "TITULAR",
+          "beneficiario": "SHIRLEY MARIA RODRIGUES ARAUJO",
+          "cpf_cnpj": "054.561.601-88",
+          "valor": 18.8
+        },
+        {
           "tipo": "ADESÃO",
           "vigencia": "15/07/2026",
           "contratante": "VICTOR ALVES VIEIRA",
@@ -2508,20 +2506,18 @@ const DATA = {
           "cpf_cnpj": "050.219.231-37",
           "valor": 0.0
         }
-      ],
-      "total": 136,
-      "valor_total": 2584.8
+      ]
     },
-    "mensagem_diretoria": "A DR. HOJE mantém uma carteira ativa de 8.555 vidas, com predominância do segmento empresarial (96,5%). Julho registra até 15/07: 30 inclusões (15 Empresarial, 15 Adesão) e 57 exclusões — 44 delas no segmento Adesão. No acumulado de 2026, o canal de adesão registra 273 inclusões, com destaque para o produto Saúde na Tela (68,5% das vendas), seguido por Saúde Todos (28,9%). A base total caiu 28 vidas entre 10/07 e 15/07 (8.583 → 8.555), pressionada pelas exclusões de Adesão por inadimplência."
+    "mensagem_diretoria": "A DR. HOJE finaliza o período com 8513 vidas ativas na carteira (Adesão: 261 | PJ: 8252)."
   },
   "pagina2_evolucao_movimentacao": {
     "titulo": "VISÃO EXECUTIVA 02 - EVOLUÇÃO E MOVIMENTAÇÃO DA CARTEIRA",
     "kpis": {
-      "inclusoes_2026": 1583,
+      "inclusoes_2026": 1581,
       "exclusoes_2026": 1972,
-      "saldo_liquido": -389,
-      "base_atual": 8555,
-      "concentracao_empresarial_pct": 96.5,
+      "saldo_liquido": -391,
+      "base_atual": 8513,
+      "concentracao_empresarial_pct": 96.9,
       "obs_s1_saude": 979
     },
     "evolucao_mensal": [
@@ -2533,9 +2529,9 @@ const DATA = {
       },
       {
         "mes": "FEV/26",
-        "inclusoes": 51,
+        "inclusoes": 50,
         "exclusoes": 63,
-        "saldo": -12
+        "saldo": -13
       },
       {
         "mes": "MAR/26",
@@ -2563,23 +2559,23 @@ const DATA = {
       },
       {
         "mes": "JUL/26 (até 15/07)",
-        "inclusoes": 30,
+        "inclusoes": 29,
         "exclusoes": 57,
-        "saldo": -27
+        "saldo": -28
       }
     ],
-    "inclusoes_acumuladas": 1583,
+    "inclusoes_acumuladas": 1581,
     "exclusoes_acumuladas": 1972,
-    "saldo_liquido_2026": -389,
+    "saldo_liquido_2026": -391,
     "inclusoes_por_produto": [
       {
         "produto": "PLUS",
         "vidas": 979,
-        "pct": 61.8
+        "pct": 61.9
       },
       {
         "produto": "SAÚDE NA TELA",
-        "vidas": 187,
+        "vidas": 186,
         "pct": 11.8
       },
       {
@@ -2594,11 +2590,11 @@ const DATA = {
       },
       {
         "produto": "DEMAIS PRODUTOS",
-        "vidas": 186,
+        "vidas": 185,
         "pct": 11.7
       }
     ],
-    "inclusoes_por_produto_total": 1583,
+    "inclusoes_por_produto_total": 1581,
     "motivos_exclusao": [
       {
         "motivo": "SOLICITAÇÃO DA EMPRESA",
@@ -2661,121 +2657,109 @@ const DATA = {
     ],
     "top5_total_vidas": 7914,
     "top5_pct_base_empresarial": 95.9,
-    "top5_vidas_acima_demais": 7574,
+    "top5_vidas_acima_demais": 7576,
     "resumo_executivo": [
       {
-        "titulo": "SALDO LÍQUIDO NEGATIVO EM 2026",
-        "texto": "Em 2026. a carteira registra saldo negativo de 389 vidas. resultado de 1.583 inclusões e 1.972 exclusões. sinalizando necessidade de atenção à retenção da base."
-      },
-      {
-        "titulo": "EXPANSÃO CONCENTRADA EM MAIO",
-        "texto": "O mês de maio foi decisivo para o crescimento da carteira, com 1.120 inclusões, representando 70.8% de todas as inclusões do ano, impulsionadas principalmente pelo produto PLUS."
-      },
-      {
-        "titulo": "ATENÇÃO À RETENÇÃO",
-        "texto": "As exclusões em junho/26 totalizaram 527 vidas. Julho/26 registra até 15/07: 30 inclusões (15 Empresarial, 15 Adesão) e 57 exclusões — 44 delas no segmento Adesão."
-      },
-      {
-        "titulo": "CARTEIRA EMPRESARIAL CONCENTRADA",
-        "texto": "A S1 Operadora representa 82.4% da base empresarial (6.801 vidas). A estratégia deve manter o foco nesses grandes contratos e na diversificação da carteira no longo prazo."
+        "titulo": "SALDO LÍQUIDO 2026",
+        "texto": "A carteira acumula um saldo de -391 vidas em 2026 (1581 inclusões e 1972 exclusões)."
       }
     ],
-    "mensagem_diretoria": "A DR. HOJE segue julho/2026 com saldo líquido negativo de 389 vidas em 2026 (1.583 inclusões e 1.972 exclusões). Maio concentrou a maior parte das inclusões (1.120). impulsionado pelo produto PLUS via S1 SAÚDE. Julho/26 registra até 15/07: 30 inclusões (15 Empresarial + 15 Adesão) e 57 exclusões — 44 das exclusões são do segmento Adesão (inadimplência é o principal motivo do ano). A base total caiu de 8.583 (10/07) para 8.555 vidas."
+    "mensagem_diretoria": "Acumulado 2026: 1581 inclusões e 1972 exclusões. Saldo líquido de -391 vidas."
   },
   "pagina3_carteira_por_produto": {
     "titulo": "VIDAS ATIVAS POR PRODUTO – DISTRIBUIÇÃO DE VIDAS POR TIPO E PRODUTO",
     "kpis": {
-      "vidas_ativas": 8555,
-      "adesao": 301,
-      "adesao_pct": 3.5,
-      "empresarial": 8254,
-      "empresarial_pct": 96.5,
+      "vidas_ativas": 8513,
+      "adesao": 261,
+      "adesao_pct": 3.1,
+      "empresarial": 8252,
+      "empresarial_pct": 96.9,
       "produtos_disponiveis": 15
     },
     "distribuicao_adesao": [
       {
         "produto": "TOTAL ADESÃO",
-        "vidas": 301,
+        "vidas": 261,
         "pct": 100.0,
         "destaque": true
       },
       {
         "produto": "SAÚDE TODOS",
-        "vidas": 126,
-        "pct": 41.9
+        "vidas": 122,
+        "pct": 46.7
       },
       {
         "produto": "SAÚDE NA TELA",
-        "vidas": 125,
-        "pct": 41.5
+        "vidas": 96,
+        "pct": 36.8
       },
       {
         "produto": "TODOS",
-        "vidas": 23,
-        "pct": 7.6
+        "vidas": 17,
+        "pct": 6.5
       },
       {
         "produto": "DR. ONLINE",
         "vidas": 10,
-        "pct": 3.3
-      },
-      {
-        "produto": "SAUDE TOTAL",
-        "vidas": 5,
-        "pct": 1.7
+        "pct": 3.8
       },
       {
         "produto": "TOTAL",
         "vidas": 5,
-        "pct": 1.7
+        "pct": 1.9
+      },
+      {
+        "produto": "SAUDE TOTAL",
+        "vidas": 4,
+        "pct": 1.5
       },
       {
         "produto": "SAÚDE TOTAL+ODONTO",
         "vidas": 3,
-        "pct": 1.0
+        "pct": 1.1
       },
       {
         "produto": "MAIS",
         "vidas": 2,
-        "pct": 0.7
+        "pct": 0.8
       },
       {
         "produto": "DOUTOR HOJE PREMIUM",
         "vidas": 2,
-        "pct": 0.7
+        "pct": 0.8
       }
     ],
     "donut_adesao": [
       {
         "produto": "SAÚDE TODOS",
-        "vidas": 126,
-        "pct": 41.9
+        "vidas": 122,
+        "pct": 46.7
       },
       {
         "produto": "SAÚDE NA TELA",
-        "vidas": 125,
-        "pct": 41.5
+        "vidas": 96,
+        "pct": 36.8
       },
       {
         "produto": "TODOS",
-        "vidas": 23,
-        "pct": 7.6
+        "vidas": 17,
+        "pct": 6.5
       },
       {
         "produto": "DR. ONLINE",
         "vidas": 10,
-        "pct": 3.3
+        "pct": 3.8
       },
       {
         "produto": "DEMAIS PRODUTOS",
-        "vidas": 17,
-        "pct": 5.6
+        "vidas": 16,
+        "pct": 6.1
       }
     ],
     "distribuicao_empresarial": [
       {
         "produto": "TOTAL EMPRESARIAL",
-        "vidas": 8254,
+        "vidas": 8252,
         "pct": 100.0,
         "destaque": true
       },
@@ -2811,12 +2795,12 @@ const DATA = {
       },
       {
         "produto": "TOTAL",
-        "vidas": 40,
+        "vidas": 39,
         "pct": 0.5
       },
       {
         "produto": "SAÚDE TODOS",
-        "vidas": 16,
+        "vidas": 15,
         "pct": 0.2
       },
       {
@@ -2848,15 +2832,15 @@ const DATA = {
       },
       {
         "produto": "DEMAIS PRODUTOS",
-        "vidas": 244,
-        "pct": 3.0
+        "vidas": 242,
+        "pct": 2.9
       }
     ],
     "destaques": {
-      "adesao": "Os produtos Saúde Todos e Saúde Na Tela concentram 83.4% das vidas da carteira de Adesão.",
-      "empresarial": "O produto PLUS concentra 82.4% das vidas da carteira Empresarial, seguido pelos produtos da linha DOUTOR HOJE."
+      "adesao": "Distribuição detalhada dos planos de Adesão na carteira ativa.",
+      "empresarial": "Distribuição detalhada dos planos Empresariais na carteira ativa."
     },
-    "resumo_geral": "A carteira da DR. HOJE é composta majoritariamente por vidas Empresariais (96.5%), com forte concentração no produto PLUS. No segmento Adesão, os produtos Saúde Todos e Saúde Na Tela representam 83.4% da base."
+    "resumo_geral": "A base de vidas ativas totaliza 8513 vidas (PJ: 8252 e PF: 261)."
   },
   "faturamento": {
     "titulo": "VISÃO FATURAMENTO - RECEITA GERADA E PAGA",
