@@ -1,5 +1,4 @@
 # Ignorar conexao e base bruta de dados
-test_connection.py
 contratos_analitico.csv
 __pycache__/
 *.log

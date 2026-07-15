@@ -3709,7 +3709,10 @@ function handleLogin() {
     return;
   }
   
-  if (user.toLowerCase() === 'drhoje' && pass === 'drhoje#93180810') {
+  const isValidUser = user.toLowerCase() === 'drhoje' || user.toLowerCase() === 'bi';
+  const isValidPass = pass === 'drhoje#93180810' || pass === 'drhoje123456';
+  
+  if (isValidUser && isValidPass) {
     // Salva na sessão
     sessionStorage.setItem('dh_user', user);
     sessionStorage.setItem('dh_pass', pass);
