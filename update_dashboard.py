@@ -9,10 +9,19 @@ BASE_URL = "http://drhoje.salustech.com.br:8082"
 LOGIN_URL = f"{BASE_URL}/sgc/logar.jsp"
 DATA_URL = f"{BASE_URL}/sgc/carregarJson/carregarGenerico.jsp"
 
+# Tenta carregar variáveis do arquivo .env se ele existir localmente (para desenvolvimento)
+if os.path.exists(".env"):
+    with open(".env", "r", encoding="utf-8") as f:
+        for line in f:
+            line = line.strip()
+            if line and not line.startswith("#") and "=" in line:
+                key, val = line.split("=", 1)
+                os.environ[key.strip()] = val.strip()
+
 credentials = {
-    "usuario": os.environ.get("SALUSTECH_USER", "BI"),
-    "senha": os.environ.get("SALUSTECH_PASS", "drhoje123456"),
-    "cd_empresa": os.environ.get("SALUSTECH_COMPANY", "DRHOJE")
+    "usuario": os.environ.get("SALUSTECH_USER", ""),
+    "senha": os.environ.get("SALUSTECH_PASS", ""),
+    "cd_empresa": os.environ.get("SALUSTECH_COMPANY", "")
 }
 
 print("Iniciando login no Salustech...")

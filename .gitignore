@@ -2,3 +2,4 @@
 contratos_analitico.csv
 __pycache__/
 *.log
+.env
