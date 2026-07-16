@@ -5,3 +5,4 @@ __pycache__/
 .env
 conciliacao_credito_raw.csv
 scratch_conciliacao_head.csv
+test_connection.py
