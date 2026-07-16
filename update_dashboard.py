@@ -3,6 +3,7 @@ import requests
 import pandas as pd
 import json
 from datetime import datetime
+import calendar
 
 # 1. Definições de Acesso e Credenciais
 BASE_URL = "http://drhoje.salustech.com.br:8082"
@@ -37,18 +38,27 @@ params = {
     "condicao": "1 = 1"
 }
 
+params_faturamento = {
+    "search": "",
+    "order": "asc",
+    "tabela": "VW_REL_CONCILIACAO_CREDITO",
+    "campo": "TIPO_CONTRATO,DESCR_GRUPO_CONTRATO,CODCONVENIO,PLANO,TIPO_DESCRICAO,EMPRESA,MATRCLIENTE,REFERENCIA,CLIENTE,CARTEIRINHA,DESCR_STATUS_ESTIPULANTE,STATUSFI,REGIONAL,EMISSAO,VENCIMENTO_ORIGINAL,VENCIMENTO_ATUAL,PAGAMENTO,LIQUIDACAO,BAIXABANCO,CANCELAMENTO,PAGO,COLUNA20,NUMPARCELA,NRBOLETO,NOSSONUMERO,DESC_TIPO_PARCELA,COMPETENCIA,DESCR_FORMA_PAGTO,CODBANCO_LANCTO,CEDENTE,BANCO,TIPO_BAIXA,VR_LANCTO,VR_SERVICOS,VR_COPARTICIPACAO,TXASSOCIATIVA,TXADMINISTRATIVA,VR_REAJUSTE,VR_JUROS,VR_MULTA,VR_ACRESCIMO,VR_DESCONTO,VR_INCLUSAO_RETROATIVA,VR_REAJUSTE_IDADE,VR_TOTAL,VR_PAGO,QTD_SEGURADO,CPFCNPJ,OPERADORA,DTDELECAO,DTVIGENCIA,CORRETORA,DIASATRASO,VIGENCIA,DIAVENCTO,UF,JUDICIAL,TELEFONE,ENDERECO,DELETADO,DESCR_FORMAPAGTO,EMAIL,VR_PAGAR,RUBRICA,COLUNA19,DTALTERACAO,IDUSUARIO_ALT",
+    "condicao": "1 = 1"
+}
+
 # Fetch data with retry mechanism
 max_retries = 3
 df_contratos = None
 is_api_success = False
+
 for i in range(max_retries):
     try:
-        print(f"Tentando buscar registros (tentativa {i+1})...")
+        print(f"Tentando buscar registros de contratos (tentativa {i+1})...")
         response = session.get(DATA_URL, params=params, timeout=120)
         if response.status_code == 200:
             data_json = response.json()
             df_contratos = pd.DataFrame(data_json)
-            print(f"Sucesso! {len(df_contratos)} registros recuperados.")
+            print(f"Sucesso! {len(df_contratos)} registros de contratos recuperados.")
             is_api_success = True
             break
         else:
@@ -59,17 +69,41 @@ for i in range(max_retries):
             raise e
 
 if df_contratos is None or len(df_contratos) == 0:
-    print("Nenhum dado novo recuperado da API.")
+    print("Nenhum dado novo de contratos recuperado da API.")
     if os.path.exists("contratos_analitico.csv"):
         print("Carregando base de dados local de backup (contratos_analitico.csv)...")
         df_contratos = pd.read_csv("contratos_analitico.csv")
     else:
-        print("Nenhum backup local encontrado. Encerrando.")
+        print("Nenhum backup local de contratos encontrado. Encerrando.")
         exit(1)
-else:
-    # Apenas salva no arquivo local se tivermos sucesso na requisição da API
-    # Para evitar salvar dados vazios ou corromper a base local
-    pass
+
+df_faturamento = None
+is_api_faturamento_success = False
+
+for i in range(max_retries):
+    try:
+        print(f"Tentando buscar registros de faturamento (tentativa {i+1})...")
+        response = session.get(DATA_URL, params=params_faturamento, timeout=120)
+        if response.status_code == 200:
+            data_json = response.json()
+            df_faturamento = pd.DataFrame(data_json)
+            print(f"Sucesso! {len(df_faturamento)} registros de faturamento recuperados.")
+            is_api_faturamento_success = True
+            break
+        else:
+            print(f"Falha na tentativa {i+1}: Status HTTP {response.status_code}")
+    except Exception as e:
+        print(f"Erro na tentativa {i+1} no faturamento: {e}")
+        if i == max_retries - 1:
+            print("Aviso: Falha definitiva ao buscar faturamento da API.")
+
+if df_faturamento is None or len(df_faturamento) == 0:
+    print("Nenhum dado de faturamento novo recuperado da API.")
+    if os.path.exists("conciliacao_credito_raw.csv"):
+        print("Carregando base de dados local de backup (conciliacao_credito_raw.csv)...")
+        df_faturamento = pd.read_csv("conciliacao_credito_raw.csv")
+    else:
+        print("Nenhum backup local de faturamento encontrado. O faturamento não será atualizado.")
 
 
 # Clean up encoding issues in key columns
@@ -547,7 +581,189 @@ pagina3_data = {
     "resumo_geral": f"A base de vidas ativas totaliza {vidas_ativas} vidas (PJ: {empresarial} e PF: {adesao})."
 }
 
-# --- EXTRACT FATURAMENTO FROM EXISTING INDEX.HTML & MERGE ---
+# --- PROCESS FATURAMENTO DATA (PAGE 4) ---
+# Save faturamento raw CSV if fetched successfully
+if is_api_faturamento_success:
+    df_faturamento.to_csv("conciliacao_credito_raw.csv", index=False, encoding="utf-8-sig")
+
+# Clean deletado
+if 'deletado' in df_faturamento.columns:
+    df_faturamento['deletado'] = df_faturamento['deletado'].astype(str).str.strip().str.upper()
+    df_faturamento = df_faturamento[df_faturamento['deletado'] == 'NAO']
+
+# Convert numeric fields
+for col in ['vr_total', 'vr_pago', 'vr_lancto']:
+    if col in df_faturamento.columns:
+        df_faturamento[col] = pd.to_numeric(df_faturamento[col].astype(str).str.replace(',', '.'), errors='coerce').fillna(0.0)
+
+# Filter vencimento_original <= last day of current month
+if 'vencimento_original' in df_faturamento.columns:
+    df_faturamento['venc_date'] = pd.to_datetime(df_faturamento['vencimento_original'], format='%d/%m/%Y', errors='coerce')
+    last_day = calendar.monthrange(today.year, today.month)[1]
+    date_limit = datetime(today.year, today.month, last_day)
+    df_faturamento = df_faturamento[df_faturamento['venc_date'] <= date_limit]
+
+# Clean tipo_contrato
+if 'tipo_contrato' in df_faturamento.columns:
+    df_faturamento['tipo_contrato'] = df_faturamento['tipo_contrato'].astype(str).str.strip().str.upper()
+    df_faturamento['tipo_contrato'] = df_faturamento['tipo_contrato'].apply(lambda x: 'ADESÃO' if 'ADE' in x else ('EMPRESARIAL' if 'EMP' in x else x))
+
+# Clean tipo_descricao
+if 'tipo_descricao' in df_faturamento.columns:
+    df_faturamento['tipo_descricao'] = df_faturamento['tipo_descricao'].astype(str).str.strip().str.upper()
+    df_faturamento['tipo_descricao'] = df_faturamento['tipo_descricao'].str.replace('SADE', 'SAÚDE').str.replace('BENEFCIOS', 'BENEFÍCIOS')
+
+# Filter 2026 months
+df_faturamento_2026 = df_faturamento[df_faturamento['competencia'].isin(months_keys)].copy()
+
+# KPIs
+total_gerado = float(df_faturamento_2026['vr_total'].sum())
+total_pago = float(df_faturamento_2026['vr_pago'].sum())
+taxa_pagamento_pct = float((total_pago / total_gerado) * 100) if total_gerado > 0 else 0.0
+saldo_a_receber = total_gerado - total_pago
+ticket_medio_mensal = total_gerado / len(months_keys)
+
+# Vidas statistics (from active contracts)
+vidas_internas_grupo = len(active_df[active_df['tipo_descricao'].str.contains('PLUS', na=False)])
+vidas_consideradas_ticket = len(active_df) - vidas_internas_grupo
+ticket_medio_mensal_por_vida = ticket_medio_mensal / vidas_consideradas_ticket if vidas_consideradas_ticket > 0 else 0.0
+
+kpis = {
+    "total_gerado": round(total_gerado, 2),
+    "total_pago": round(total_pago, 2),
+    "taxa_pagamento_pct": round(taxa_pagamento_pct, 1),
+    "saldo_a_receber": round(saldo_a_receber, 2),
+    "ticket_medio_mensal": round(ticket_medio_mensal, 2),
+    "vidas_internas_grupo": vidas_internas_grupo,
+    "vidas_consideradas_ticket": vidas_consideradas_ticket,
+    "ticket_medio_mensal_por_vida": round(ticket_medio_mensal_por_vida, 2)
+}
+
+# Evolução Mensal
+evolucao_mensal = []
+for idx, m_key in enumerate(months_keys):
+    m_df = df_faturamento_2026[df_faturamento_2026['competencia'] == m_key]
+    g = float(m_df['vr_total'].sum())
+    p = float(m_df['vr_pago'].sum())
+    t = (p / g) * 100 if g > 0 else 0.0
+    
+    mes_label = month_abbr_caps[idx].capitalize()
+    if idx == len(months_keys) - 1:
+        mes_label += "*"
+        
+    evolucao_mensal.append({
+        "mes": mes_label,
+        "gerado": round(g, 2),
+        "pago": round(p, 2),
+        "taxa_pct": round(t, 1)
+    })
+
+# Evolução por segmento
+evolucao_por_segmento = []
+for idx, m_key in enumerate(months_keys):
+    m_df = df_faturamento_2026[df_faturamento_2026['competencia'] == m_key]
+    
+    ad_m = m_df[m_df['tipo_contrato'] == 'ADESÃO']
+    ad_g = float(ad_m['vr_total'].sum())
+    ad_p = float(ad_m['vr_pago'].sum())
+    
+    emp_m = m_df[m_df['tipo_contrato'] == 'EMPRESARIAL']
+    emp_g = float(emp_m['vr_total'].sum())
+    emp_p = float(emp_m['vr_pago'].sum())
+    
+    mes_label = month_abbr_caps[idx].capitalize()
+    if idx == len(months_keys) - 1:
+        mes_label += "*"
+        
+    evolucao_por_segmento.append({
+        "mes": mes_label,
+        "adesao_gerado": round(ad_g, 2),
+        "adesao_pago": round(ad_p, 2),
+        "empresarial_gerado": round(emp_g, 2),
+        "empresarial_pago": round(emp_p, 2)
+    })
+
+# Por segmento (total gerado in 2026)
+por_segmento = []
+for seg in ['EMPRESARIAL', 'ADESÃO']:
+    seg_df = df_faturamento_2026[df_faturamento_2026['tipo_contrato'] == seg]
+    g = float(seg_df['vr_total'].sum())
+    por_segmento.append({
+        "segmento": seg,
+        "gerado": round(g, 2),
+        "pct": round((g / total_gerado) * 100, 1) if total_gerado > 0 else 0.0
+    })
+
+# Top produtos por receita (total gerado in 2026)
+product_revenue = df_faturamento_2026.groupby('tipo_descricao')['vr_total'].sum().reset_index()
+product_revenue = product_revenue.sort_values(by='vr_total', ascending=False)
+top_produtos = []
+top_3_prods = product_revenue.head(3)
+for idx, row in top_3_prods.iterrows():
+    top_produtos.append({
+        "produto": row['tipo_descricao'],
+        "valor": round(float(row['vr_total']), 2),
+        "pct": round((row['vr_total'] / total_gerado) * 100, 1) if total_gerado > 0 else 0.0
+    })
+others_val = float(product_revenue.iloc[3:]['vr_total'].sum()) if len(product_revenue) > 3 else 0.0
+if others_val > 0:
+    top_produtos.append({
+        "produto": "DEMAIS PRODUTOS",
+        "valor": round(others_val, 2),
+        "pct": round((others_val / total_gerado) * 100, 1) if total_gerado > 0 else 0.0
+    })
+
+# Produtos adesão (receitas)
+adesao_df = df_faturamento_2026[df_faturamento_2026['tipo_contrato'] == 'ADESÃO']
+ad_prod_revenue = adesao_df.groupby('tipo_descricao')['vr_total'].sum().reset_index()
+ad_prod_revenue = ad_prod_revenue.sort_values(by='vr_total', ascending=False)
+total_adesao_gerado = float(adesao_df['vr_total'].sum())
+produtos_adesao = []
+for idx, row in ad_prod_revenue.iterrows():
+    produtos_adesao.append({
+        "produto": row['tipo_descricao'],
+        "valor": round(float(row['vr_total']), 2),
+        "pct": round((row['vr_total'] / total_adesao_gerado) * 100, 1) if total_adesao_gerado > 0 else 0.0
+    })
+
+# Produtos empresarial (receitas)
+emp_df = df_faturamento_2026[df_faturamento_2026['tipo_contrato'] == 'EMPRESARIAL']
+emp_prod_revenue = emp_df.groupby('tipo_descricao')['vr_total'].sum().reset_index()
+emp_prod_revenue = emp_prod_revenue.sort_values(by='vr_total', ascending=False)
+total_emp_gerado = float(emp_df['vr_total'].sum())
+produtos_empresarial = []
+for idx, row in emp_prod_revenue.iterrows():
+    produtos_empresarial.append({
+        "produto": row['tipo_descricao'],
+        "valor": round(float(row['vr_total']), 2),
+        "pct": round((row['vr_total'] / total_emp_gerado) * 100, 1) if total_emp_gerado > 0 else 0.0
+    })
+
+# Destaques
+destaques = {
+    "adesao": f"O produto {produtos_adesao[0]['produto']} concentra {produtos_adesao[0]['pct']}% da receita gerada em Adesão." if len(produtos_adesao) > 0 else "",
+    "empresarial": f"O produto {produtos_empresarial[0]['produto']} concentra {produtos_empresarial[0]['pct']}% da receita gerada em Empresarial." if len(produtos_empresarial) > 0 else ""
+}
+
+# Mensagem Diretoria
+current_month_name = month_names_pt[len(months_keys)-1]
+mensagem_diretoria = f"O faturamento gerado em 2026 (Jan-{month_abbr_caps[len(months_keys)-1].capitalize()}) somou R$ {total_gerado:,.2f}, com R$ {total_pago:,.2f} pago — taxa de pagamento de {taxa_pagamento_pct:.1f}%. O segmento Empresarial responde por {por_segmento[0]['pct']}% da receita gerada. Cadastro atualizado até {today.strftime('%d/%m/%Y')}."
+
+faturamento_data = {
+    "titulo": "VISÃO FATURAMENTO - RECEITA GERADA E PAGA",
+    "periodo": f"Janeiro a {current_month_name.capitalize()}/2026",
+    "kpis": kpis,
+    "observacao_periodo": f"Dados de faturamento atualizados até {date_limit.strftime('%d/%m/%Y')} (última BASE FATURAMENTO disponível). Cadastro atualizado até {today.strftime('%d/%m/%Y')}. {month_names_pt[len(months_keys)-2].capitalize()} fechado; {current_month_name.capitalize()} em andamento.",
+    "evolucao_mensal": evolucao_mensal,
+    "evolucao_por_segmento": evolucao_por_segmento,
+    "por_segmento": por_segmento,
+    "top_produtos": top_produtos,
+    "produtos_adesao": produtos_adesao,
+    "produtos_empresarial": produtos_empresarial,
+    "destaques": destaques,
+    "mensagem_diretoria": mensagem_diretoria
+}
+
 html_files = ["index.html", "dashboard_dr_hoje.html"]
 
 for file_path in html_files:
@@ -562,12 +778,6 @@ for file_path in html_files:
     
     start_idx = content.find(start_marker) + len(start_marker)
     end_idx = content.find(end_marker)
-    
-    data_str = content[start_idx:end_idx].strip().rstrip(';')
-    existing_data = json.loads(data_str)
-    
-    # Retain the faturamento section as it was
-    faturamento_data = existing_data.get("faturamento", {})
     
     # Update meta dates
     meta_data = {
