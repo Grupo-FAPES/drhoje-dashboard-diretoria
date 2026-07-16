@@ -1,8 +1,6 @@
 # Ignorar conexao e base bruta de dados
-contratos_analitico.csv
+data/
+scripts/test_connection.py
 __pycache__/
 *.log
 .env
-conciliacao_credito_raw.csv
-scratch_conciliacao_head.csv
-test_connection.py
