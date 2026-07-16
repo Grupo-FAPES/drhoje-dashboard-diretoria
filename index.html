@@ -3480,7 +3480,7 @@ function renderPage2(){
   kpis.appendChild(kpiCard('building', COLORS.navy, fmtInt(k.base_atual), 'BASE ATUAL', `Vidas ativas em ${fmtDateBR(DATA.meta.posicao_em)}`));
   kpis.appendChild(kpiCard('layers', COLORS.purple, fmtPct(k.concentracao_empresarial_pct), 'CONCENTRAÇÃO EMPRESARIAL', '% da base ativa'));
 
-  document.getElementById('p2Note').textContent = `${fmtInt(k.obs_s1_saude)} vidas via referentes às inclusões da S1 SAÚDE`;
+  document.getElementById('p2Note').textContent = `${fmtInt(k.obs_s1_saude)} vidas via referentes às inclusões da S1 SAÚDE no mês 05/2026`;
 
   const evo = p.evolucao_mensal;
   if(charts.p2Evo) charts.p2Evo.destroy();
