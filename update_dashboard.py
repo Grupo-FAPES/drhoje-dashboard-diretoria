@@ -592,9 +592,22 @@ if 'deletado' in df_faturamento.columns:
     df_faturamento = df_faturamento[df_faturamento['deletado'] == 'NAO']
 
 # Convert numeric fields
+def clean_numeric(val):
+    if pd.isna(val):
+        return 0.0
+    val_str = str(val).strip().replace(' ', '')
+    if '.' in val_str and ',' in val_str:
+        val_str = val_str.replace('.', '').replace(',', '.')
+    elif ',' in val_str:
+        val_str = val_str.replace(',', '.')
+    try:
+        return float(val_str)
+    except ValueError:
+        return 0.0
+
 for col in ['vr_total', 'vr_pago', 'vr_lancto']:
     if col in df_faturamento.columns:
-        df_faturamento[col] = pd.to_numeric(df_faturamento[col].astype(str).str.replace(',', '.'), errors='coerce').fillna(0.0)
+        df_faturamento[col] = df_faturamento[col].apply(clean_numeric)
 
 # Filter vencimento_original <= last day of current month
 if 'vencimento_original' in df_faturamento.columns:
