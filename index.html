@@ -3741,6 +3741,7 @@ function activateTab(n){
   document.getElementById('hdrKicker').textContent = m.kicker;
   document.getElementById('hdrTitle').textContent = m.title;
   document.getElementById('hdrSubtitle').textContent = m.subtitle;
+  sessionStorage.setItem('dh_active_tab', n);
   if(!rendered[n]){ renderers[n](); rendered[n] = true; }
   else { Object.values(charts).forEach(c => c && c.resize && c.resize()); }
 }
@@ -3753,7 +3754,13 @@ document.getElementById('hdrDate').textContent = fmtDateBR(DATA.meta.posicao_em)
 document.getElementById('footFonte').textContent = `Fonte: ${DATA.meta.fonte} | Desenvolvido por Geisa Gomes`;
 document.getElementById('footAtualizado').textContent = `Dados atualizados em ${fmtDateBR(DATA.meta.atualizado_em)}`;
 
-activateTab('1');
+const initialTab = sessionStorage.getItem('dh_active_tab') || '1';
+activateTab(initialTab);
+
+// Auto-refresh a cada 10 minutos (600.000 ms) para carregar novos dados
+setTimeout(() => {
+  window.location.reload();
+}, 600000);
 
 // Lógica de Login Básica Estática
 function handleLogin() {
