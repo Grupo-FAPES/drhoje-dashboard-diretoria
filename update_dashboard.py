@@ -842,8 +842,9 @@ for file_path in html_files:
     with open(file_path, "r", encoding="utf-8") as f:
         content = f.read()
         
-    start_marker = "const DATA = "
-    end_marker = "/* ---------------- helpers ---------------- */"
+    import base64
+    start_marker = 'const DATA_RAW = "'
+    end_marker = '";\nconst DATA = JSON.parse(new TextDecoder().decode(Uint8Array.from(atob(DATA_RAW), c => c.charCodeAt(0))));'
     
     start_idx = content.find(start_marker) + len(start_marker)
     end_idx = content.find(end_marker)
@@ -867,11 +868,12 @@ for file_path in html_files:
         "faturamento": faturamento_data
     }
     
-    # Serialize with nice formatting
-    new_data_str = json.dumps(new_data, ensure_ascii=False, indent=2)
+    # Serialize to compact JSON and encode to base64
+    new_data_str = json.dumps(new_data, ensure_ascii=False)
+    b64_str = base64.b64encode(new_data_str.encode('utf-8')).decode('utf-8')
     
     # Write back to file
-    new_content = content[:start_idx] + new_data_str + ";\n\n" + content[end_idx:]
+    new_content = content[:start_idx] + b64_str + content[end_idx:]
     with open(file_path, "w", encoding="utf-8") as f:
         f.write(new_content)
         
