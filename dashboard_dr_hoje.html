@@ -3851,10 +3851,12 @@ function handleLogin() {
     return;
   }
   
-  const isValidUser = user.toLowerCase() === 'drhoje' || user.toLowerCase() === 'bi';
-  const isValidPass = pass === 'drhoje#93180810' || pass === 'drhoje123456';
+  const u = user.toLowerCase();
+  const isValid = (u === 'drhoje' && pass === 'drhoje#93180810') ||
+                  (u === 'bi' && pass === 'drhoje123456') ||
+                  (u === 'farias' && pass === 'farias12345');
   
-  if (isValidUser && isValidPass) {
+  if (isValid) {
     // Salva na sessão
     sessionStorage.setItem('dh_user', user);
     sessionStorage.setItem('dh_pass', pass);
