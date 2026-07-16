@@ -467,6 +467,48 @@ for idx, (company, count) in enumerate(pj_active_counts.head(5).items()):
 top5_total_vidas = sum(x['vidas'] for x in top5_empresas_items)
 top5_pct_base_empresarial = round((top5_total_vidas / total_pj_active) * 100, 1) if total_pj_active > 0 else 0.0
 top5_vidas_acima_demais = top5_total_vidas - (total_pj_active - top5_total_vidas)
+# --- RESUMO EXECUTIVO DYN CALCULATIONS ---
+# 1. Saldo Líquido
+saldo_liquido_abs = abs(saldo_liquido)
+
+# 2. Expansão Concentrada (Mês Pico)
+peak_idx = total_list.index(max(total_list))
+peak_month_key = months_keys[peak_idx]
+peak_month_name = month_names_pt[peak_idx]
+peak_inc = total_list[peak_idx]
+peak_pct = round((peak_inc / inclusoes_2026) * 100, 1) if inclusoes_2026 > 0 else 0.0
+
+peak_month_df = inc_2026[inc_2026['mes_ano_inclusao'] == peak_month_key]
+if not peak_month_df.empty:
+    peak_top_product = peak_month_df['tipo_descricao'].value_counts().index[0]
+else:
+    peak_top_product = "PLUS"
+
+# 3. Atenção à Retenção
+prev_month_name_full = month_names_pt[-2].lower() if len(month_names_pt) >= 2 else "anterior"
+curr_month_name_full = month_names_pt[-1].capitalize()
+
+prev_month_excl = len(df_contratos[df_contratos['mes_ano_inativacao'] == months_keys[-2]]) if len(months_keys) >= 2 else 0
+
+curr_month_inc_df = df_contratos[df_contratos['mes_ano_inclusao'] == months_keys[-1]]
+curr_month_inc_count = len(curr_month_inc_df)
+curr_month_inc_emp = len(curr_month_inc_df[curr_month_inc_df['tipo_contrato'] == 'EMPRESARIAL'])
+curr_month_inc_ad = len(curr_month_inc_df[curr_month_inc_df['tipo_contrato'] == 'ADESÃO'])
+
+curr_month_excl_df = df_contratos[df_contratos['mes_ano_inativacao'] == months_keys[-1]]
+curr_month_excl_count = len(curr_month_excl_df)
+curr_month_excl_ad = len(curr_month_excl_df[curr_month_excl_df['tipo_contrato'] == 'ADESÃO'])
+
+# 4. Carteira Empresarial Concentrada
+top_company = top5_empresas_items[0]
+top_company_name = top_company['empresa']
+top_company_name_display = top_company_name
+if "SI OPERADORA" in top_company_name_display.upper() or "S1 OPERADORA" in top_company_name_display.upper():
+    top_company_name_display = "S1 Operadora"
+elif len(top_company_name_display) > 30:
+    top_company_name_display = top_company_name_display[:27] + "..."
+
+top_company_vidas_formatted = f"{top_company['vidas']:,}".replace(",", ".")
 
 pagina2_data = {
     "titulo": "VISÃO EXECUTIVA 02 - EVOLUÇÃO E MOVIMENTAÇÃO DA CARTEIRA",
@@ -492,8 +534,20 @@ pagina2_data = {
     "top5_vidas_acima_demais": top5_vidas_acima_demais,
     "resumo_executivo": [
         {
-            "titulo": "SALDO LÍQUIDO 2026",
-            "texto": f"A carteira acumula um saldo de {saldo_liquido} vidas em 2026 ({inclusoes_2026} inclusões e {exclusoes_2026} exclusões)."
+            "titulo": "SALDO LÍQUIDO NEGATIVO EM 2026" if saldo_liquido < 0 else "SALDO LÍQUIDO POSITIVO EM 2026",
+            "texto": f"Em 2026, a carteira registra saldo {'negativo' if saldo_liquido < 0 else 'positivo'} de {saldo_liquido_abs:,} vidas, resultado de {inclusoes_2026:,} inclusões e {exclusoes_2026:,} exclusões, sinalizando necessidade de atenção à retenção da base.".replace(",", ".")
+        },
+        {
+            "titulo": f"EXPANSÃO CONCENTRADA EM {peak_month_name.upper()}",
+            "texto": f"O mês de {peak_month_name} foi decisivo para o crescimento da carteira, com {peak_inc:,} inclusões, representando {peak_pct}% de todas as inclusões do ano, impulsionadas principalmente pelo produto {peak_top_product}.".replace(",", ".")
+        },
+        {
+            "titulo": "ATENÇÃO À RETENÇÃO",
+            "texto": f"As exclusões em {prev_month_name_full}/26 totalizaram {prev_month_excl:,} vidas. {curr_month_name_full}/26 registra até {today.strftime('%d/%m')}: {curr_month_inc_count:,} inclusões ({curr_month_inc_emp:,} Empresarial, {curr_month_inc_ad:,} Adesão) e {curr_month_excl_count:,} exclusões — {curr_month_excl_ad:,} delas no segmento Adesão.".replace(",", ".")
+        },
+        {
+            "titulo": "CARTEIRA EMPRESARIAL CONCENTRADA",
+            "texto": f"A {top_company_name_display} representa {top_company['pct_empresarial']}% da base empresarial ({top_company_vidas_formatted} vidas). A estratégia deve manter o foco nesses grandes contratos e na diversificação da carteira no longo prazo."
         }
     ],
     "mensagem_diretoria": f"Acumulado 2026: {inclusoes_2026} inclusões e {exclusoes_2026} exclusões. Saldo líquido de {saldo_liquido} vidas."
