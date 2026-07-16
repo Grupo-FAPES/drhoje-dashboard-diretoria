@@ -728,7 +728,7 @@ if others_val > 0:
 
 # Produtos adesão (receitas)
 adesao_df = df_faturamento_2026[df_faturamento_2026['tipo_contrato'] == 'ADESÃO']
-ad_prod_revenue = adesao_df.groupby('tipo_descricao')['vr_total'].sum().reset_index()
+ad_prod_revenue = adesao_df.groupby('tipo_descricao')[['vr_total', 'vr_pago']].sum().reset_index()
 ad_prod_revenue = ad_prod_revenue.sort_values(by='vr_total', ascending=False)
 total_adesao_gerado = float(adesao_df['vr_total'].sum())
 produtos_adesao = []
@@ -736,12 +736,13 @@ for idx, row in ad_prod_revenue.iterrows():
     produtos_adesao.append({
         "produto": row['tipo_descricao'],
         "valor": round(float(row['vr_total']), 2),
+        "pago": round(float(row['vr_pago']), 2),
         "pct": round((row['vr_total'] / total_adesao_gerado) * 100, 1) if total_adesao_gerado > 0 else 0.0
     })
 
 # Produtos empresarial (receitas)
 emp_df = df_faturamento_2026[df_faturamento_2026['tipo_contrato'] == 'EMPRESARIAL']
-emp_prod_revenue = emp_df.groupby('tipo_descricao')['vr_total'].sum().reset_index()
+emp_prod_revenue = emp_df.groupby('tipo_descricao')[['vr_total', 'vr_pago']].sum().reset_index()
 emp_prod_revenue = emp_prod_revenue.sort_values(by='vr_total', ascending=False)
 total_emp_gerado = float(emp_df['vr_total'].sum())
 produtos_empresarial = []
@@ -749,6 +750,7 @@ for idx, row in emp_prod_revenue.iterrows():
     produtos_empresarial.append({
         "produto": row['tipo_descricao'],
         "valor": round(float(row['vr_total']), 2),
+        "pago": round(float(row['vr_pago']), 2),
         "pct": round((row['vr_total'] / total_emp_gerado) * 100, 1) if total_emp_gerado > 0 else 0.0
     })
 

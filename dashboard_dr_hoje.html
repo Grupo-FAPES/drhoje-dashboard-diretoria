@@ -3078,56 +3078,67 @@ const DATA = {
       {
         "produto": "SAÚDE NA TELA",
         "valor": 43499.9,
+        "pago": 18415.12,
         "pct": 57.9
       },
       {
         "produto": "SAÚDE TODOS",
         "valor": 17815.12,
+        "pago": 10830.7,
         "pct": 23.7
       },
       {
         "produto": "SAUDE TOTAL",
         "valor": 2754.8,
+        "pago": 1280.2,
         "pct": 3.7
       },
       {
         "produto": "TOTAL",
         "valor": 2630.3,
+        "pago": 1220.2,
         "pct": 3.5
       },
       {
         "produto": "DOUTOR HOJE PREMIUM",
         "valor": 2457.0,
+        "pago": 2100.0,
         "pct": 3.3
       },
       {
         "produto": "TODOS",
         "valor": 2159.78,
+        "pago": 1607.24,
         "pct": 2.9
       },
       {
         "produto": "SAÚDE TOTAL+ODONTO",
         "valor": 1835.6,
+        "pago": 1286.7,
         "pct": 2.4
       },
       {
         "produto": "DR. ONLINE",
         "valor": 702.9,
+        "pago": 603.9,
         "pct": 0.9
       },
       {
         "produto": "SAÚDE NA TELA + ODONTO",
         "valor": 664.2,
+        "pago": 147.6,
         "pct": 0.9
       },
       {
         "produto": "MAIS",
         "valor": 513.0,
+        "pago": 461.2,
         "pct": 0.7
       },
       {
         "produto": "SAUDE PLENA",
         "valor": 119.6,
+        "pago": 0.0,
         "pct": 0.2
       }
     ],
@@ -3135,61 +3146,73 @@ const DATA = {
       {
         "produto": "DOUTOR HOJE MAIS",
         "valor": 62916.14,
+        "pago": 54018.99,
         "pct": 42.5
       },
       {
         "produto": "DOUTOR HOJE TODOS",
         "valor": 30351.3,
+        "pago": 26260.5,
         "pct": 20.5
       },
       {
         "produto": "DR. ONLINE",
         "valor": 15077.1,
+        "pago": 12764.75,
         "pct": 10.2
       },
       {
         "produto": "SAÚDE INTEGRAL",
         "valor": 12644.0,
+        "pago": 9962.6,
         "pct": 8.5
       },
       {
         "produto": "CONECTA SAÚDE",
         "valor": 11740.1,
+        "pago": 11669.74,
         "pct": 7.9
       },
       {
         "produto": "SAÚDE NA TELA",
         "valor": 7650.0,
+        "pago": 3825.0,
         "pct": 5.2
       },
       {
         "produto": "SAÚDE TODOS",
         "valor": 4340.0,
+        "pago": 3182.97,
         "pct": 2.9
       },
       {
         "produto": "DOUTOR HOJE TOTAL",
         "valor": 2734.7,
+        "pago": 1978.2,
         "pct": 1.8
       },
       {
         "produto": "SEGURO DE VIDA",
         "valor": 300.0,
+        "pago": 300.0,
         "pct": 0.2
       },
       {
         "produto": "PLUS",
         "valor": 280.0,
+        "pago": 165.0,
         "pct": 0.2
       },
       {
         "produto": "TOTAL",
         "valor": 178.0,
+        "pago": 39.0,
         "pct": 0.1
       },
       {
         "produto": "SAÚDE NA TELA + ODONTO",
         "valor": 0.0,
+        "pago": 0.0,
         "pct": 0.0
       }
     ],
@@ -3711,10 +3734,11 @@ function renderPage4(){
   legendList('p4TopLegend', top.map(x=>({label:x.produto, value:`${fmtMoeda(x.valor)} (${fmtPct(x.pct)})`})), DONUT5);
 
   function buildFatTable(tableId, items){
-    const headers = ['PRODUTO','GERADO (R$)','%'];
-    const rows = items.map(it => [it.produto, fmtMoeda(it.valor), fmtPct(it.pct)]);
-    const total = items.reduce((s,it)=>s+it.valor,0);
-    rows.push(['TOTAL', fmtMoeda(total), fmtPct(100)]);
+    const headers = ['PRODUTO','GERADO (R$)','PAGO (R$)','%'];
+    const rows = items.map(it => [it.produto, fmtMoeda(it.valor), fmtMoeda(it.pago || 0), fmtPct(it.pct)]);
+    const totalVal = items.reduce((s,it)=>s+it.valor,0);
+    const totalPago = items.reduce((s,it)=>s+(it.pago || 0),0);
+    rows.push(['TOTAL', fmtMoeda(totalVal), fmtMoeda(totalPago), fmtPct(100)]);
     buildTable(document.getElementById(tableId), headers, rows, rows.length-1);
   }
   buildFatTable('p4AdesaoTable', p.produtos_adesao);
