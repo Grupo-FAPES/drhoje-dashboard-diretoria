@@ -3850,6 +3850,15 @@ setTimeout(() => {
 }, 600000);
 
 // Lógica de Login Básica Estática
+function hash(str) {
+  let h = 5381;
+  for (let i = 0; i < str.length; i++) {
+    h = ((h << 5) + h) + str.charCodeAt(i);
+    h = h & h;
+  }
+  return (h >>> 0).toString(16);
+}
+
 function handleLogin() {
   const user = document.getElementById('username').value.trim();
   const pass = document.getElementById('password').value.trim();
@@ -3864,9 +3873,10 @@ function handleLogin() {
   }
   
   const u = user.toLowerCase();
-  const isValid = (u === 'drhoje' && pass === 'drhoje#93180810') ||
-                  (u === 'bi' && pass === 'drhoje123456') ||
-                  (u === 'farias' && pass === 'farias12345');
+  const comboHash = hash(u + ':' + pass);
+  const isValid = comboHash === 'e10240d8' || 
+                  comboHash === 'b3e4af1b' || 
+                  comboHash === '2629ce2a';
   
   if (isValid) {
     // Salva na sessão
