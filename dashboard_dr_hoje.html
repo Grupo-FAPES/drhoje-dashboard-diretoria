@@ -413,6 +413,7 @@
     <button class="tab-btn" data-tab="2">Visão Executiva</button>
     <button class="tab-btn" data-tab="3">Vidas Ativas por Produto</button>
     <button class="tab-btn" data-tab="4">Faturamento</button>
+    <button class="tab-btn play-pause-btn" id="btnPlayPause" style="background: #16A085; color: white; border-color: #16A085; margin-left: auto;">⏸ Pausar</button>
   </div>
 
   <!-- PAGE 1 -->
@@ -3735,7 +3736,9 @@ let rendered = { '1':false, '2':false, '3':false, '4':false };
 const renderers = { '1':renderPage1, '2':renderPage2, '3':renderPage3, '4':renderPage4 };
 
 function activateTab(n){
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === n));
+  document.querySelectorAll('.tab-btn').forEach(b => {
+    if (b.id !== 'btnPlayPause') b.classList.toggle('active', b.dataset.tab === n);
+  });
   document.querySelectorAll('.panel').forEach(p => p.classList.toggle('active', p.id === 'panel-'+n));
   const m = TAB_META[n];
   document.getElementById('hdrKicker').textContent = m.kicker;
@@ -3746,8 +3749,56 @@ function activateTab(n){
   else { Object.values(charts).forEach(c => c && c.resize && c.resize()); }
 }
 
+let presentationInterval = null;
+let isPlaying = sessionStorage.getItem('dh_presentation_playing') !== 'false';
+
+function startPresentation() {
+  if (presentationInterval) clearInterval(presentationInterval);
+  presentationInterval = setInterval(() => {
+    if (!isPlaying) return;
+    const currentTab = sessionStorage.getItem('dh_active_tab') || '1';
+    let nextTab = '1';
+    if (currentTab === '1') nextTab = '2';
+    else if (currentTab === '2') nextTab = '3';
+    else if (currentTab === '3') nextTab = '4';
+    else if (currentTab === '4') nextTab = '1';
+    activateTab(nextTab);
+  }, 60000);
+}
+
+function updatePlayPauseButton() {
+  const btn = document.getElementById('btnPlayPause');
+  if (!btn) return;
+  if (isPlaying) {
+    btn.innerHTML = '⏸ Pausar';
+    btn.style.background = '#F2994A';
+    btn.style.borderColor = '#F2994A';
+  } else {
+    btn.innerHTML = '▶ Apresentação';
+    btn.style.background = '#16A085';
+    btn.style.borderColor = '#16A085';
+  }
+}
+
+function togglePresentation() {
+  isPlaying = !isPlaying;
+  sessionStorage.setItem('dh_presentation_playing', isPlaying ? 'true' : 'false');
+  updatePlayPauseButton();
+  if (isPlaying) {
+    startPresentation();
+  } else {
+    if (presentationInterval) clearInterval(presentationInterval);
+  }
+}
+
 document.querySelectorAll('.tab-btn').forEach(btn => {
-  btn.addEventListener('click', () => activateTab(btn.dataset.tab));
+  if (btn.id === 'btnPlayPause') return;
+  btn.addEventListener('click', () => {
+    if (isPlaying) {
+      togglePresentation();
+    }
+    activateTab(btn.dataset.tab);
+  });
 });
 
 document.getElementById('hdrDate').textContent = fmtDateBR(DATA.meta.posicao_em);
@@ -3803,6 +3854,14 @@ window.addEventListener('DOMContentLoaded', () => {
     if (e.key === 'Enter') handleLogin();
   });
   
+  // Play/Pause button initialization
+  const btnPP = document.getElementById('btnPlayPause');
+  if (btnPP) btnPP.addEventListener('click', togglePresentation);
+  updatePlayPauseButton();
+  if (isPlaying) {
+    startPresentation();
+  }
+
   // Auto-login se já autenticado na sessão atual
   const cachedUser = sessionStorage.getItem('dh_user');
   const cachedPass = sessionStorage.getItem('dh_pass');
