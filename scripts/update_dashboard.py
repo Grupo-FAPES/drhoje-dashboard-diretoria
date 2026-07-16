@@ -291,20 +291,20 @@ media_mensal = round(sum(adesao_list) / len(adesao_list), 1)
 acumulado_2026 = sum(adesao_list)
 
 # Vendas por consultor
-adesao_2026['regional'] = adesao_2026['regional'].fillna('Venda Direta (Site)')
+adesao_2026['regional'] = adesao_2026['regional'].fillna('VENDA DIRETA (SITE)').astype(str).str.upper()
 consultor_counts = adesao_2026['regional'].value_counts()
 vendas_por_consultor = []
 total_vendas_consultor = len(adesao_2026)
 for c_name, count in consultor_counts.items():
     vendas_por_consultor.append({
-        "consultor": str(c_name),
+        "consultor": str(c_name).upper(),
         "vendas": int(count),
         "pct": round((count / total_vendas_consultor) * 100, 1) if total_vendas_consultor > 0 else 0.0
     })
 
 # Inclusões por consultor no mês de referência
 current_period_inclusions_copy = current_period_inclusions.copy()
-current_period_inclusions_copy['consultor_clean'] = current_period_inclusions_copy['regional'].fillna('Venda Direta (Site)')
+current_period_inclusions_copy['consultor_clean'] = current_period_inclusions_copy['regional'].fillna('VENDA DIRETA (SITE)').astype(str).str.upper()
 consultor_period = current_period_inclusions_copy.groupby(['consultor_clean', 'tipo_contrato']).agg(
     inclusoes=('tipo_contrato', 'size'),
     valor=('total_geral', 'sum')
@@ -316,7 +316,7 @@ consultor_period = consultor_period.sort_values(by='inclusoes', ascending=False)
 inclusoes_junho_por_consultor_items = []
 for row in consultor_period.to_dict('records'):
     inclusoes_junho_por_consultor_items.append({
-        "consultor": row['consultor_clean'],
+        "consultor": str(row['consultor_clean']).upper(),
         "tipo": row['tipo_contrato'],
         "inclusoes": int(row['inclusoes']),
         "pct": row['pct'],
@@ -336,7 +336,7 @@ for row in current_period_inclusions.to_dict('records'):
         "tipo": row['tipo_contrato'],
         "vigencia": row['dtvigencia_benef'],
         "contratante": row['nome'],
-        "consultor": "null" if pd.isna(row['regional']) and row['tipo_contrato'] == 'ADESÃO' else (row['regional'] if pd.notna(row['regional']) else "Venda Direta (Site)"),
+        "consultor": "null" if pd.isna(row['regional']) and row['tipo_contrato'] == 'ADESÃO' else (str(row['regional']).upper() if pd.notna(row['regional']) else "VENDA DIRETA (SITE)"),
         "tipo_descricao": row['tipo_descricao'],
         "tipo_beneficiario": row['tipo_segurado'],
         "beneficiario": row['nome_segurado'],
