@@ -33,7 +33,7 @@ jobs:
         SALUSTECH_USER: ${{ secrets.SALUSTECH_USER }}
         SALUSTECH_PASS: ${{ secrets.SALUSTECH_PASS }}
         SALUSTECH_COMPANY: ${{ secrets.SALUSTECH_COMPANY }}
-      run: python update_dashboard.py
+      run: python scripts/update_dashboard.py
 
     - name: Commit and push changes
       run: |
