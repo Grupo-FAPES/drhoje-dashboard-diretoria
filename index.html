@@ -5,8 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>DR. HOJE — Dashboard Executivo</title>
 <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+<link rel="icon" type="image/x-icon" href="assets/favicon.ico">
 <link rel="manifest" href="assets/site.webmanifest">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.js" integrity="sha384-iU8HYtnGQ8Cy4zl7gbNMOhsDTTKX02BTXptVP/vqAWIaTfM7isw76iyZCsjL2eVi" crossorigin="anonymous"></script>
 <style>
@@ -445,6 +444,11 @@
           <div class="entrada-hoje-value" id="p1EntradaHojeValue">+0</div>
           <div class="entrada-hoje-sub" id="p1EntradaHojeSub"></div>
         </div>
+        <div class="entrada-hoje" style="margin-top: 10px;">
+          <div class="entrada-hoje-label">Entradas Acumuladas do Mês</div>
+          <div class="entrada-hoje-value" id="p1EntradaAcumuladoValue">+0</div>
+          <div class="entrada-hoje-sub" id="p1EntradaAcumuladoSub"></div>
+        </div>
         <div class="destaques-list" id="p1Destaques"></div>
       </div>
       <div class="card">
@@ -825,9 +829,21 @@ function renderPage1(){
       scales:{ y:{ beginAtZero:true, ticks:{font:{size:9}}, grid:{color:'#EEF1F7'} }, x:{ ticks:{font:{size:8.5}}, grid:{display:false} } } },
     plugins: [barValueLabelPlugin]
   });
-  const ultimoDia = inc[inc.length - 1];
-  document.getElementById('p1EntradaHojeValue').textContent = `+${fmtInt(ultimoDia.valor)}`;
-  document.getElementById('p1EntradaHojeSub').textContent = `Último dia com inclusão registrada: ${ultimoDia.dia}/2026`;
+  // 1. Entradas (Hoje) - Dinâmico para a data atualizada
+  const posicaoParts = DATA.meta.posicao_em.split('-');
+  const diaHoje = `${posicaoParts[2]}/${posicaoParts[1]}`;
+  const hojeEntry = inc.find(d => d.dia === diaHoje);
+  const valorHoje = hojeEntry ? hojeEntry.valor : 0;
+  document.getElementById('p1EntradaHojeValue').textContent = `+${fmtInt(valorHoje)}`;
+  document.getElementById('p1EntradaHojeSub').textContent = `Dia atualizado: ${fmtDateBR(DATA.meta.posicao_em)}`;
+
+  // 2. Entradas Acumuladas do Mês (filtra apenas o mês atual baseado em posicao_em)
+  const mesAtual = posicaoParts[1]; // ex: "07"
+  const incMesAtual = inc.filter(d => d.dia.endsWith('/' + mesAtual));
+  const totalPeriodo = incMesAtual.reduce((acc, d) => acc + d.valor, 0);
+  document.getElementById('p1EntradaAcumuladoValue').textContent = `+${fmtInt(totalPeriodo)}`;
+  const ultimoDiaMes = incMesAtual.length > 0 ? incMesAtual[incMesAtual.length - 1] : inc[inc.length - 1];
+  document.getElementById('p1EntradaAcumuladoSub').textContent = `Último dia com inclusão registrada: ${ultimoDiaMes.dia}/2026`;
   const dCol = [COLORS.navy2, COLORS.teal, COLORS.blue];
   const dest = document.getElementById('p1Destaques'); dest.innerHTML = '';
   p.destaques_periodo.forEach((d,i)=>{
