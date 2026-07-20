@@ -48,7 +48,16 @@ jobs:
         git add -A
         if ! git diff --staged --quiet; then
           git commit -m "Auto-update dashboard data"
-          git pull --rebase origin main
-          git push origin main
+          for i in {1..3}; do
+            if git pull --rebase origin main && git push origin main; then
+              echo "Push realizado com sucesso na tentativa $i"
+              break
+            fi
+            if [ $i -lt 3 ]; then
+              echo "Falha no push. Tentando novamente em 5 segundos (tentativa $i)..."
+              sleep 5
+            fi
+          done
         fi
+
 
