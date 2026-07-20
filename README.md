@@ -8,25 +8,37 @@ O painel é atualizado de forma 100% automatizada por meio de um script em Pytho
 
 ## 🚀 Arquitetura & Como Funciona
 
-O projeto opera sob uma arquitetura serverless híbrida:
+O projeto opera sob uma arquitetura de **Dupla Redundância**:
 
 ```mermaid
 graph TD
-    A[Cron: GitHub Actions a cada 10 min] --> B[Roda update_dashboard.py]
+    subgraph Nuvem [1. Redundância em Nuvem]
+        A[Cron: GitHub Actions a cada 10 min]
+    end
+
+    subgraph Local [2. Redundância Local - Agendador Windows]
+        L1[Agendador de Tarefas do Windows] --> L2[disparar_silencioso.vbs em 2º plano]
+        L2 --> L3[disparar_workflow.bat]
+        L3 --> L4[Atualiza scripts/last_trigger.txt e dá Git Push]
+    end
+
+    A --> B[Roda update_dashboard.py]
+    L4 --> B
     B --> C[Faz login na API do Salustech]
     C --> D[Extrai Contratos & Faturamento]
     D --> E[Calcula KPIs e Resumo Executivo Dinâmico]
     E --> F[Codifica os dados em Base64]
-    F --> G[Injeta nos arquivos index.html e dashboard_dr_hoje.html]
-    G --> H[Faz commit automático na branch main]
-    H --> I[Gatilho do GitHub Pages]
-    I --> J[Publica o Dashboard atualizado no link de produção]
+    F --> G[Injeta em index.html e dashboard_dr_hoje.html]
+    G --> H[Commit resiliente com Retry Loop + Rebase]
+    H --> I[Deploy automático no GitHub Pages]
 ```
 
 1. **GitHub Actions (Cron):** A cada 10 minutos, o GitHub dispara o workflow `.github/workflows/update_data.yml`.
-2. **Atualização de Dados:** O ambiente do GitHub instala o Python, lê as credenciais de acesso nos segredos do repositório (Secrets), e executa o script `update_dashboard.py`.
-3. **Extração & Validação:** O script se conecta à API externa da Salustech, puxa os registros mais recentes e atualiza os arquivos `index.html` e `dashboard_dr_hoje.html`.
-4. **Publicação (Deploy):** Havendo novos registros, o robô realiza o commit das alterações na branch `main`, o que dispara a compilação do GitHub Pages e atualiza o painel que você visualiza no navegador em menos de 2 minutos.
+2. **Agendador do Windows (Redundância Local):** Dispara em segundo plano via `disparar_silencioso.vbs` acionando o gatilho sem abrir janelas no sistema.
+3. **Resiliência contra Conflitos:** O workflow utiliza um algoritmo de **retry loop (até 3 tentativas com `git pull --rebase`)** para garantir que conflitos de commits concorrentes sejam resolvidos automaticamente sem falhas no deploy.
+4. **Extração & Validação:** O script se conecta à API da Salustech, puxa os registros mais recentes e atualiza os arquivos `index.html` e `dashboard_dr_hoje.html`.
+5. **Publicação (Deploy):** Havendo novos registros, o robô realiza o commit das alterações na branch `main`, atualizando o painel no GitHub Pages em menos de 2 minutos.
+
 
 ---
 
