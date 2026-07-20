@@ -5,5 +5,7 @@ __pycache__/
 *.log
 .env
 *.bat
+*.vbs
 atualizar_dashboard.bat
 disparar_workflow.bat
+disparar_silencioso.vbs
