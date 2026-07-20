@@ -428,7 +428,7 @@
         <div class="chart-box" style="height:170px;"><canvas id="p1DonutComposicao"></canvas></div>
         <div class="legend-list" id="p1ComposicaoLegend"></div>
         <div class="card-subsection">
-          <div class="card-subtitle">Vendas por Consultor — 2026</div>
+          <div class="card-subtitle" id="p1ConsultorTitle">Vendas por Consultor</div>
           <div class="donut-col">
             <div class="chart-box"><canvas id="p1DonutConsultor"></canvas></div>
             <div class="legend-list" id="p1ConsultorLegend" style="flex:1;"></div>
@@ -437,7 +437,7 @@
         </div>
       </div>
       <div class="card">
-        <div class="card-title">Inclusões Adesão por Dia — Jun+Jul/2026</div>
+        <div class="card-title" id="p1IncDiaTitle">Inclusões Adesão por Dia</div>
         <div class="chart-box" style="height:150px;"><canvas id="p1BarInclusoes"></canvas></div>
         <div class="entrada-hoje">
           <div class="entrada-hoje-label">Entradas (Hoje)</div>
@@ -452,18 +452,18 @@
         <div class="destaques-list" id="p1Destaques"></div>
       </div>
       <div class="card">
-        <div class="card-title">Vendas Adesão por Produto — 2026</div>
+        <div class="card-title" id="p1VendasTitle">Vendas Adesão por Produto</div>
         <div class="table-scroll"><table class="dash-table" id="p1VendasTable"></table></div>
         <div class="rank-row" id="p1Ranking"></div>
         <div class="stat-row" id="p1Stats"></div>
       </div>
     </div>
     <div class="card">
-      <div class="card-title">Inclusões por Mês e Tipo — 2026</div>
+      <div class="card-title" id="p1IncMesTipoTitle">Inclusões por Mês e Tipo</div>
       <div class="table-scroll"><table class="dash-table dash-table-center" id="p1PivotMesTipo"></table></div>
     </div>
     <div class="card">
-      <div class="card-title">Valor das Inclusões por Mês e Tipo — 2026</div>
+      <div class="card-title" id="p1ValorIncTitle">Valor das Inclusões por Mês e Tipo</div>
       <div class="table-scroll"><table class="dash-table dash-table-center" id="p1PivotMesTipoValor"></table></div>
     </div>
     <div class="card">
@@ -495,14 +495,14 @@
         <div class="chart-box" style="height:200px;"><canvas id="p2Evolucao"></canvas></div>
       </div>
       <div class="card">
-        <div class="card-title">Inclusões 2026 por Produto</div>
+        <div class="card-title" id="p2IncProdTitle">Inclusões por Produto</div>
         <div class="donut-col">
           <div class="chart-box"><canvas id="p2DonutInclusoes"></canvas></div>
           <div class="legend-list" id="p2IncLegend" style="flex:1;"></div>
         </div>
       </div>
       <div class="card">
-        <div class="card-title">Principais Motivos de Exclusão 2026</div>
+        <div class="card-title" id="p2MotivosTitle">Principais Motivos de Exclusão</div>
         <div class="donut-col">
           <div class="chart-box"><canvas id="p2DonutMotivos"></canvas></div>
           <div class="legend-list" id="p2MotLegend" style="flex:1;"></div>
@@ -571,18 +571,18 @@
     <div class="note-card" id="p4Note"></div>
     <div class="row row-3-evo">
       <div class="card">
-        <div class="card-title">Evolução Mensal — Faturamento Gerado x Pago — 01 a 06/2026</div>
+        <div class="card-title" id="p4EvoTitle">Evolução Mensal — Faturamento Gerado x Pago</div>
         <div class="chart-box" style="height:200px;"><canvas id="p4Evolucao"></canvas></div>
       </div>
       <div class="card">
-        <div class="card-title">Faturamento por Segmento — Gerado de 01 a 06/2026</div>
+        <div class="card-title" id="p4SegTitle">Faturamento por Segmento — Gerado</div>
         <div class="donut-col">
           <div class="chart-box"><canvas id="p4DonutSegmento"></canvas></div>
           <div class="legend-list" id="p4SegLegend" style="flex:1;"></div>
         </div>
       </div>
       <div class="card">
-        <div class="card-title">Top Produtos por Receita — Gerado de 01 a 06/2026</div>
+        <div class="card-title" id="p4TopTitle">Top Produtos por Receita — Gerado</div>
         <div class="donut-col">
           <div class="chart-box"><canvas id="p4DonutTop"></canvas></div>
           <div class="legend-list" id="p4TopLegend" style="flex:1;"></div>
@@ -590,31 +590,31 @@
       </div>
     </div>
     <div class="card">
-      <div class="card-title">Faturamento Gerado por Segmento — Mês a Mês (2026)</div>
+      <div class="card-title" id="p4PivotGeradoTitle">Faturamento Gerado por Segmento — Mês a Mês</div>
       <div class="table-scroll"><table class="dash-table dash-table-center" id="p4PivotGerado"></table></div>
     </div>
     <div class="row row-2-eq">
       <div class="card">
-        <div class="card-title">Faturamento Mensal — Adesão (Gerado x Pago) — 01 a 06/2026</div>
+        <div class="card-title" id="p4EvoAdesaoTitle">Faturamento Mensal — Adesão (Gerado x Pago)</div>
         <div class="chart-box" style="height:190px;"><canvas id="p4EvoAdesao"></canvas></div>
       </div>
       <div class="card">
-        <div class="card-title">Faturamento Mensal — Empresarial (Gerado x Pago) — 01 a 06/2026</div>
+        <div class="card-title" id="p4EvoEmpresarialTitle">Faturamento Mensal — Empresarial (Gerado x Pago)</div>
         <div class="chart-box" style="height:190px;"><canvas id="p4EvoEmpresarial"></canvas></div>
       </div>
     </div>
     <div class="card">
-      <div class="card-title">Faturamento Pago por Segmento — Mês a Mês (2026)</div>
+      <div class="card-title" id="p4PivotPagoTitle">Faturamento Pago por Segmento — Mês a Mês</div>
       <div class="table-scroll"><table class="dash-table dash-table-center" id="p4PivotPago"></table></div>
     </div>
     <div class="row row-2-eq">
       <div class="card">
-        <div class="card-title">Faturamento por Produto — Adesão (Gerado de 01 a 06/2026)</div>
+        <div class="card-title" id="p4AdesaoTableTitle">Faturamento por Produto — Adesão</div>
         <div class="table-scroll"><table class="dash-table" id="p4AdesaoTable"></table></div>
         <div class="destaque-callout" id="p4DestaqueAdesao"></div>
       </div>
       <div class="card">
-        <div class="card-title">Faturamento por Produto — Empresarial (Gerado de 01 a 06/2026)</div>
+        <div class="card-title" id="p4EmpresarialTableTitle">Faturamento por Produto — Empresarial</div>
         <div class="table-scroll"><table class="dash-table" id="p4EmpresarialTable"></table></div>
         <div class="destaque-callout" id="p4DestaqueEmpresarial"></div>
       </div>
@@ -784,7 +784,7 @@ function renderPage1(){
   kpis.appendChild(kpiCard('users', COLORS.navy, fmtInt(k.vidas_ativas), 'VIDAS ATIVAS', 'Total de beneficiários'));
   kpis.appendChild(kpiCard('building', COLORS.navy2, fmtInt(k.empresarial), 'EMPRESARIAL', `${fmtPct(k.empresarial_pct)} do total de vidas`));
   kpis.appendChild(kpiCard('heart', COLORS.teal, fmtInt(k.adesao), 'ADESÃO', `${fmtPct(k.adesao_pct)} do total de vidas`));
-  kpis.appendChild(kpiCard('plus', COLORS.orange, `+${fmtInt(k.inclusoes_junho)}`, 'INCLUSÕES EM JUNHO', k.inclusoes_junho_obs));
+  kpis.appendChild(kpiCard('plus', COLORS.orange, `+${fmtInt(k.inclusoes_junho)}`, 'INCLUSÕES NO PERÍODO', k.inclusoes_junho_obs));
 
   const cc = p.composicao_carteira;
   if(charts.p1Donut) charts.p1Donut.destroy();
@@ -888,7 +888,7 @@ function renderPage1(){
   const statDefs = [
     ['award', `${p.melhor_mes.mes}`, `Melhor mês (${fmtInt(p.melhor_mes.inclusoes)} inclusões)`],
     ['calendar', fmtPct(p.media_mensal,1).replace('%',''), 'Média mensal'],
-    ['box', fmtInt(p.acumulado_2026), 'Acumulado 2026']
+    ['box', fmtInt(p.acumulado_2026), `Acumulado ${posicaoParts[0]}`]
   ];
   statDefs.forEach(([ic,val,lbl])=>{
     const chip = el('div','stat-chip');
@@ -924,6 +924,18 @@ function renderPage1(){
   buildTable(document.getElementById('p1IncJunDetalheTable'), ijdHeaders, ijdRows, ijdRows.length-1, [1,2,3,4,5,6,7]);
 
   document.getElementById('p1Mensagem').textContent = p.mensagem_diretoria;
+
+  // Títulos dinâmicos - Page 1
+  const anoRef = posicaoParts[0];
+  const mesesGrafico = [...new Set(inc.map(d => d.dia.split('/')[1]))].map(m => {
+    const nomes = {'01':'Jan','02':'Fev','03':'Mar','04':'Abr','05':'Mai','06':'Jun','07':'Jul','08':'Ago','09':'Set','10':'Out','11':'Nov','12':'Dez'};
+    return nomes[m] || m;
+  });
+  document.getElementById('p1IncDiaTitle').textContent = `Inclusões Adesão por Dia — ${mesesGrafico.join('+')}/${anoRef}`;
+  document.getElementById('p1ConsultorTitle').textContent = `Vendas por Consultor — ${anoRef}`;
+  document.getElementById('p1VendasTitle').textContent = `Vendas Adesão por Produto — ${anoRef}`;
+  document.getElementById('p1IncMesTipoTitle').textContent = `Inclusões por Mês e Tipo — ${anoRef}`;
+  document.getElementById('p1ValorIncTitle').textContent = `Valor das Inclusões por Mês e Tipo — ${anoRef}`;
 }
 
 /* ---------------- PAGE 2 ---------------- */
@@ -1009,6 +1021,11 @@ function renderPage2(){
   });
 
   document.getElementById('p2Mensagem').textContent = p.mensagem_diretoria;
+
+  // Títulos dinâmicos - Page 2
+  const anoRef2 = DATA.meta.posicao_em.split('-')[0];
+  document.getElementById('p2IncProdTitle').textContent = `Inclusões ${anoRef2} por Produto`;
+  document.getElementById('p2MotivosTitle').textContent = `Principais Motivos de Exclusão ${anoRef2}`;
 }
 
 /* ---------------- PAGE 3 ---------------- */
@@ -1180,6 +1197,19 @@ function renderPage4(){
   document.getElementById('p4DestaqueEmpresarial').textContent = p.destaques.empresarial;
 
   document.getElementById('p4Mensagem').textContent = p.mensagem_diretoria;
+
+  // Títulos dinâmicos - Page 4 (Faturamento)
+  const anoRef4 = DATA.meta.posicao_em.split('-')[0];
+  const periodoFat = p.periodo || `Janeiro a Julho/${anoRef4}`;
+  document.getElementById('p4EvoTitle').textContent = `Evolução Mensal — Faturamento Gerado x Pago — ${periodoFat}`;
+  document.getElementById('p4SegTitle').textContent = `Faturamento por Segmento — Gerado de ${periodoFat}`;
+  document.getElementById('p4TopTitle').textContent = `Top Produtos por Receita — Gerado de ${periodoFat}`;
+  document.getElementById('p4PivotGeradoTitle').textContent = `Faturamento Gerado por Segmento — Mês a Mês (${anoRef4})`;
+  document.getElementById('p4EvoAdesaoTitle').textContent = `Faturamento Mensal — Adesão (Gerado x Pago) — ${periodoFat}`;
+  document.getElementById('p4EvoEmpresarialTitle').textContent = `Faturamento Mensal — Empresarial (Gerado x Pago) — ${periodoFat}`;
+  document.getElementById('p4PivotPagoTitle').textContent = `Faturamento Pago por Segmento — Mês a Mês (${anoRef4})`;
+  document.getElementById('p4AdesaoTableTitle').textContent = `Faturamento por Produto — Adesão (Gerado de ${periodoFat})`;
+  document.getElementById('p4EmpresarialTableTitle').textContent = `Faturamento por Produto — Empresarial (Gerado de ${periodoFat})`;
 }
 
 /* ---------------- header + footer + tabs ---------------- */
@@ -1187,7 +1217,7 @@ const TAB_META = {
   '1': { kicker:'DR. HOJE', title:'VISÃO EXECUTIVA - VENDAS', subtitle:'CARTEIRA DE BENEFICIÁRIOS' },
   '2': { kicker:'DR. HOJE', title:'VISÃO EXECUTIVA 02', subtitle:'EVOLUÇÃO E MOVIMENTAÇÃO DA CARTEIRA' },
   '3': { kicker:'DR. HOJE', title:'VIDAS ATIVAS POR PRODUTO', subtitle:'DISTRIBUIÇÃO DE VIDAS POR TIPO E PRODUTO' },
-  '4': { kicker:'DR. HOJE', title:'VISÃO FATURAMENTO', subtitle:'RECEITA GERADA E PAGA — 2026' }
+  '4': { kicker:'DR. HOJE', title:'VISÃO FATURAMENTO', subtitle:`RECEITA GERADA E PAGA — ${DATA.meta.posicao_em.split('-')[0]}` }
 };
 let rendered = { '1':false, '2':false, '3':false, '4':false };
 const renderers = { '1':renderPage1, '2':renderPage2, '3':renderPage3, '4':renderPage4 };
