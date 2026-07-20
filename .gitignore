@@ -6,6 +6,9 @@ __pycache__/
 .env
 *.bat
 *.vbs
+*.csv
+contratos_analitico.csv
+conciliacao_credito_raw.csv
 atualizar_dashboard.bat
 disparar_workflow.bat
 disparar_silencioso.vbs
