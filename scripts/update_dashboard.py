@@ -68,9 +68,16 @@ for i in range(max_retries):
         if i == max_retries - 1:
             raise e
 
+os.makedirs("data", exist_ok=True)
+CONTRATOS_CSV_PATH = os.path.join("data", "contratos_analitico.csv")
+FATURAMENTO_CSV_PATH = os.path.join("data", "conciliacao_credito_raw.csv")
+
 if df_contratos is None or len(df_contratos) == 0:
     print("Nenhum dado novo de contratos recuperado da API.")
-    if os.path.exists("contratos_analitico.csv"):
+    if os.path.exists(CONTRATOS_CSV_PATH):
+        print(f"Carregando base de dados local de backup ({CONTRATOS_CSV_PATH})...")
+        df_contratos = pd.read_csv(CONTRATOS_CSV_PATH)
+    elif os.path.exists("contratos_analitico.csv"):
         print("Carregando base de dados local de backup (contratos_analitico.csv)...")
         df_contratos = pd.read_csv("contratos_analitico.csv")
     else:
@@ -99,7 +106,10 @@ for i in range(max_retries):
 
 if df_faturamento is None or len(df_faturamento) == 0:
     print("Nenhum dado de faturamento novo recuperado da API.")
-    if os.path.exists("conciliacao_credito_raw.csv"):
+    if os.path.exists(FATURAMENTO_CSV_PATH):
+        print(f"Carregando base de dados local de backup ({FATURAMENTO_CSV_PATH})...")
+        df_faturamento = pd.read_csv(FATURAMENTO_CSV_PATH)
+    elif os.path.exists("conciliacao_credito_raw.csv"):
         print("Carregando base de dados local de backup (conciliacao_credito_raw.csv)...")
         df_faturamento = pd.read_csv("conciliacao_credito_raw.csv")
     else:
@@ -122,9 +132,9 @@ if 'motivo_exclusao' in df_contratos.columns:
 if 'total_geral' in df_contratos.columns:
     df_contratos['total_geral'] = pd.to_numeric(df_contratos['total_geral'].astype(str).str.replace(',', '.'), errors='coerce').fillna(0.0)
 
-# Save raw data to CSV locally for backup/audit if fetched fresh from API
+# Save raw data to CSV locally in data/ folder for backup/audit if fetched fresh from API
 if is_api_success:
-    df_contratos.to_csv("contratos_analitico.csv", index=False, encoding="utf-8-sig")
+    df_contratos.to_csv(CONTRATOS_CSV_PATH, index=False, encoding="utf-8-sig")
 
 # --- DATA MANIPULATION & CALCULATIONS ---
 today = datetime.now()
@@ -638,7 +648,7 @@ pagina3_data = {
 # --- PROCESS FATURAMENTO DATA (PAGE 4) ---
 # Save faturamento raw CSV if fetched successfully
 if is_api_faturamento_success:
-    df_faturamento.to_csv("conciliacao_credito_raw.csv", index=False, encoding="utf-8-sig")
+    df_faturamento.to_csv(FATURAMENTO_CSV_PATH, index=False, encoding="utf-8-sig")
 
 # Clean deletado
 if 'deletado' in df_faturamento.columns:
