@@ -178,7 +178,7 @@ adesao_pct = round((adesao / vidas_ativas) * 100, 1) if vidas_ativas > 0 else 0.
 current_period_keys = [months_keys[-2], months_keys[-1]] if len(months_keys) >= 2 else [months_keys[-1]]
 current_period_all_inclusions = df_contratos[df_contratos['mes_ano_inclusao'].isin(current_period_keys)]
 current_period_inclusions = current_period_all_inclusions[current_period_all_inclusions['tipo_contrato'] == 'ADESÃO']
-inclusoes_junho = len(current_period_inclusions)
+inclusoes_junho = len(current_period_all_inclusions)
 
 obs_period_name = f"{month_names_pt[len(months_keys)-2].capitalize()}+{month_names_pt[len(months_keys)-1].capitalize()}" if len(months_keys) >= 2 else month_names_pt[len(months_keys)-1].capitalize()
 inclusoes_junho_obs = f"{obs_period_name}/2026 (até {today.strftime('%d/%m')})"
