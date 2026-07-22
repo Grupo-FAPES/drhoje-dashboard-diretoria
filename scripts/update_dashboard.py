@@ -174,9 +174,9 @@ adesao = len(active_df[active_df['tipo_contrato'] == 'ADESÃO'])
 empresarial_pct = round((empresarial / vidas_ativas) * 100, 1) if vidas_ativas > 0 else 0.0
 adesao_pct = round((adesao / vidas_ativas) * 100, 1) if vidas_ativas > 0 else 0.0
 
-# Current period (last two months, e.g. June + July 2026)
+# Current period (last two months, e.g. June + July 2026) - Apenas ADESÃO
 current_period_keys = [months_keys[-2], months_keys[-1]] if len(months_keys) >= 2 else [months_keys[-1]]
-current_period_inclusions = df_contratos[df_contratos['mes_ano_inclusao'].isin(current_period_keys)]
+current_period_inclusions = df_contratos[(df_contratos['mes_ano_inclusao'].isin(current_period_keys)) & (df_contratos['tipo_contrato'] == 'ADESÃO')]
 inclusoes_junho = len(current_period_inclusions)
 
 obs_period_name = f"{month_names_pt[len(months_keys)-2].capitalize()}+{month_names_pt[len(months_keys)-1].capitalize()}" if len(months_keys) >= 2 else month_names_pt[len(months_keys)-1].capitalize()
