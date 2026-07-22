@@ -174,15 +174,16 @@ adesao = len(active_df[active_df['tipo_contrato'] == 'ADESÃO'])
 empresarial_pct = round((empresarial / vidas_ativas) * 100, 1) if vidas_ativas > 0 else 0.0
 adesao_pct = round((adesao / vidas_ativas) * 100, 1) if vidas_ativas > 0 else 0.0
 
-# Current period (last two months, e.g. June + July 2026) - Apenas ADESÃO
+# Current period (last two months, e.g. June + July 2026)
 current_period_keys = [months_keys[-2], months_keys[-1]] if len(months_keys) >= 2 else [months_keys[-1]]
-current_period_inclusions = df_contratos[(df_contratos['mes_ano_inclusao'].isin(current_period_keys)) & (df_contratos['tipo_contrato'] == 'ADESÃO')]
+current_period_all_inclusions = df_contratos[df_contratos['mes_ano_inclusao'].isin(current_period_keys)]
+current_period_inclusions = current_period_all_inclusions[current_period_all_inclusions['tipo_contrato'] == 'ADESÃO']
 inclusoes_junho = len(current_period_inclusions)
 
 obs_period_name = f"{month_names_pt[len(months_keys)-2].capitalize()}+{month_names_pt[len(months_keys)-1].capitalize()}" if len(months_keys) >= 2 else month_names_pt[len(months_keys)-1].capitalize()
 inclusoes_junho_obs = f"{obs_period_name}/2026 (até {today.strftime('%d/%m')})"
 
-# Inclusoes por dia no periodo
+# Inclusoes por dia no periodo (Apenas ADESÃO)
 daily_df = current_period_inclusions.copy()
 daily_df['date_parsed'] = pd.to_datetime(daily_df['dtvigencia_benef'], format='%d/%m/%Y', errors='coerce')
 daily_df = daily_df.dropna(subset=['date_parsed'])
@@ -312,14 +313,14 @@ for c_name, count in consultor_counts.items():
         "pct": round((count / total_vendas_consultor) * 100, 1) if total_vendas_consultor > 0 else 0.0
     })
 
-# Inclusões por consultor no mês de referência
-current_period_inclusions_copy = current_period_inclusions.copy()
-current_period_inclusions_copy['consultor_clean'] = current_period_inclusions_copy['regional'].fillna('VENDA DIRETA (SITE)').astype(str).str.upper()
-consultor_period = current_period_inclusions_copy.groupby(['consultor_clean', 'tipo_contrato']).agg(
+# Inclusões por consultor no mês de referência (Todos os tipos: ADESÃO + EMPRESARIAL)
+current_period_all_inclusions_copy = current_period_all_inclusions.copy()
+current_period_all_inclusions_copy['consultor_clean'] = current_period_all_inclusions_copy['regional'].fillna('VENDA DIRETA (SITE)').astype(str).str.upper()
+consultor_period = current_period_all_inclusions_copy.groupby(['consultor_clean', 'tipo_contrato']).agg(
     inclusoes=('tipo_contrato', 'size'),
     valor=('total_geral', 'sum')
 ).reset_index()
-consultor_period['pct'] = (consultor_period['inclusoes'] / len(current_period_inclusions) * 100).round(1)
+consultor_period['pct'] = (consultor_period['inclusoes'] / len(current_period_all_inclusions) * 100).round(1)
 consultor_period['valor'] = consultor_period['valor'].round(1)
 consultor_period = consultor_period.sort_values(by='inclusoes', ascending=False)
 
@@ -335,13 +336,13 @@ for row in consultor_period.to_dict('records'):
 inclusoes_junho_por_consultor = {
     "mes_ref": inclusoes_junho_obs,
     "itens": inclusoes_junho_por_consultor_items,
-    "total": len(current_period_inclusions),
-    "valor_total": round(current_period_inclusions['total_geral'].sum(), 1)
+    "total": len(current_period_all_inclusions),
+    "valor_total": round(current_period_all_inclusions['total_geral'].sum(), 1)
 }
 
-# Detalhe de inclusões
+# Detalhe de inclusões (Todos os tipos: ADESÃO + EMPRESARIAL)
 detail_items = []
-for row in current_period_inclusions.to_dict('records'):
+for row in current_period_all_inclusions.to_dict('records'):
     detail_items.append({
         "tipo": row['tipo_contrato'],
         "vigencia": row['dtvigencia_benef'],
@@ -363,7 +364,7 @@ detail_items = sorted(detail_items, key=parse_vig_date)
 inclusoes_junho_detalhe = {
     "mes_ref": inclusoes_junho_obs,
     "itens": detail_items,
-    "valor_total": round(current_period_inclusions['total_geral'].sum(), 1)
+    "valor_total": round(current_period_all_inclusions['total_geral'].sum(), 1)
 }
 
 pagina1_data = {
