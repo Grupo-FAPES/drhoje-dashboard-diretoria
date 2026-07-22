@@ -179,6 +179,7 @@ current_period_keys = [months_keys[-2], months_keys[-1]] if len(months_keys) >= 
 current_period_all_inclusions = df_contratos[df_contratos['mes_ano_inclusao'].isin(current_period_keys)]
 current_period_inclusions = current_period_all_inclusions[current_period_all_inclusions['tipo_contrato'] == 'ADESÃO']
 inclusoes_junho = len(current_period_all_inclusions)
+inclusoes_junho_adesao = len(current_period_inclusions)
 
 obs_period_name = f"{month_names_pt[len(months_keys)-2].capitalize()}+{month_names_pt[len(months_keys)-1].capitalize()}" if len(months_keys) >= 2 else month_names_pt[len(months_keys)-1].capitalize()
 inclusoes_junho_obs = f"{obs_period_name}/2026 (até {today.strftime('%d/%m')})"
@@ -388,7 +389,7 @@ pagina1_data = {
     "destaques_periodo": [
         {
             "data": "Acompanhamento Mensal",
-            "texto": f"Inclusões no período de {obs_period_name}: {inclusoes_junho} vidas registradas."
+            "texto": f"Inclusões no período de {obs_period_name}: {inclusoes_junho_adesao} vidas registradas."
         }
     ],
     "inclusoes_por_mes_tipo": inclusoes_por_mes_tipo,
