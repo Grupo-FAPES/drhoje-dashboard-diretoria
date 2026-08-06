@@ -7,10 +7,15 @@ on:
     paths-ignore:
       - 'index.html'
       - 'dashboard_dr_hoje.html'
+      - 'scripts/trigger_pages.txt'
   workflow_dispatch:
 
 permissions:
   contents: write
+
+concurrency:
+  group: "update-dashboard-data"
+  cancel-in-progress: true
 
 jobs:
   update-data:
@@ -57,5 +62,3 @@ jobs:
             fi
           done
         fi
-
-
