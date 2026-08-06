@@ -1331,8 +1331,12 @@ function handleLogin() {
   
   if (isValid) {
     // Salva na sessão
-    sessionStorage.setItem('dh_user', user);
-    sessionStorage.setItem('dh_pass', pass);
+    try {
+      sessionStorage.setItem('dh_user', user);
+      sessionStorage.setItem('dh_pass', pass);
+    } catch(err) {
+      console.warn('sessionStorage ignorado no protocolo file:///', err);
+    }
     
     // Revela painel
     document.getElementById('login-overlay').style.display = 'none';
@@ -1362,12 +1366,16 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 
   // Auto-login se já autenticado na sessão atual
-  const cachedUser = sessionStorage.getItem('dh_user');
-  const cachedPass = sessionStorage.getItem('dh_pass');
-  if (cachedUser && cachedPass) {
-    document.getElementById('username').value = cachedUser;
-    document.getElementById('password').value = cachedPass;
-    handleLogin();
+  try {
+    const cachedUser = sessionStorage.getItem('dh_user');
+    const cachedPass = sessionStorage.getItem('dh_pass');
+    if (cachedUser && cachedPass) {
+      document.getElementById('username').value = cachedUser;
+      document.getElementById('password').value = cachedPass;
+      handleLogin();
+    }
+  } catch(err) {
+    console.warn('sessionStorage ignorado no protocolo file:///', err);
   }
 });
 </script>
