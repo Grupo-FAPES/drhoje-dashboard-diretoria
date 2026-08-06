@@ -1,19 +1,12 @@
 name: Update Dashboard Data
 
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - 'scripts/last_trigger.txt'
+  schedule:
+    - cron: '0 9 * * *'
   workflow_dispatch:
 
 permissions:
   contents: write
-
-concurrency:
-  group: "update-dashboard-data"
-  cancel-in-progress: true
 
 jobs:
   update-data:
