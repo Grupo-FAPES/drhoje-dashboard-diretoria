@@ -1331,9 +1331,11 @@ function handleLogin() {
   
   if (isValid) {
     // Salva na sessão
+    let activeTab = '1';
     try {
       sessionStorage.setItem('dh_user', user);
       sessionStorage.setItem('dh_pass', pass);
+      activeTab = sessionStorage.getItem('dh_active_tab') || '1';
     } catch(err) {
       console.warn('sessionStorage ignorado no protocolo file:///', err);
     }
@@ -1342,7 +1344,10 @@ function handleLogin() {
     document.getElementById('login-overlay').style.display = 'none';
     document.getElementById('main-content-wrap').style.display = 'block';
     
-    // Dispara redimensionamento dos gráficos para ajustar ao container visível
+    // Força reativação da aba e redimensionamento dos gráficos
+    if (typeof activateTab === 'function') {
+      activateTab(activeTab);
+    }
     if (typeof charts !== 'undefined') {
       Object.values(charts).forEach(c => c && c.resize && c.resize());
     }
