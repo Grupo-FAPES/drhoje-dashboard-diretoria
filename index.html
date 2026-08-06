@@ -7,7 +7,7 @@
 <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
 <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
 <link rel="manifest" href="assets/site.webmanifest">
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.js" integrity="sha384-iU8HYtnGQ8Cy4zl7gbNMOhsDTTKX02BTXptVP/vqAWIaTfM7isw76iyZCsjL2eVi" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.js"></script>
 <style>
   :root {
     color-scheme: light;
@@ -771,7 +771,9 @@ const centerTextPlugin = {
     ctx.restore();
   }
 };
-Chart.register(centerTextPlugin);
+if (typeof Chart !== 'undefined') {
+  Chart.register(centerTextPlugin);
+}
 
 const charts = {};
 
