@@ -1,18 +1,11 @@
-# Ignorar conexao e base bruta de dados
-data/
-scripts/test_connection.py
-__pycache__/
-*.log
+# Credenciais e configuracao ambiente
 .env
-*.bat
-*.vbs
-*.csv
-contratos_analitico.csv
-conciliacao_credito_raw.csv
-atualizar_dashboard.bat
-disparar_workflow.bat
-disparar_silencioso.vbs
-scripts/extrair_conciliacao_credito.py
-scripts/extrair_contratos_analitico.py
-marcelojr-master-orchestrator.md
-@marcelojr-master-orchestrator.md
+
+# Python e temporarios
+__pycache__/
+*.pyc
+*.log
+
+# Arquivos rascunho de IDE
+.vscode/
+.idea/
