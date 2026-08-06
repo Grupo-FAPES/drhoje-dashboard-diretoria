@@ -1215,6 +1215,21 @@ function renderPage4(){
 }
 
 /* ---------------- header + footer + tabs ---------------- */
+function safeGetStorage(key, defaultVal = null) {
+  try {
+    const val = sessionStorage.getItem(key);
+    return val !== null ? val : defaultVal;
+  } catch (e) {
+    return defaultVal;
+  }
+}
+
+function safeSetStorage(key, val) {
+  try {
+    sessionStorage.setItem(key, val);
+  } catch (e) {}
+}
+
 const TAB_META = {
   '1': { kicker:'DR. HOJE', title:'VISÃO EXECUTIVA - VENDAS', subtitle:'CARTEIRA DE BENEFICIÁRIOS' },
   '2': { kicker:'DR. HOJE', title:'VISÃO EXECUTIVA 02', subtitle:'EVOLUÇÃO E MOVIMENTAÇÃO DA CARTEIRA' },
@@ -1233,19 +1248,19 @@ function activateTab(n){
   document.getElementById('hdrKicker').textContent = m.kicker;
   document.getElementById('hdrTitle').textContent = m.title;
   document.getElementById('hdrSubtitle').textContent = m.subtitle;
-  sessionStorage.setItem('dh_active_tab', n);
+  safeSetStorage('dh_active_tab', n);
   if(!rendered[n]){ renderers[n](); rendered[n] = true; }
   else { Object.values(charts).forEach(c => c && c.resize && c.resize()); }
 }
 
 let presentationInterval = null;
-let isPlaying = sessionStorage.getItem('dh_presentation_playing') !== 'false';
+let isPlaying = safeGetStorage('dh_presentation_playing') !== 'false';
 
 function startPresentation() {
   if (presentationInterval) clearInterval(presentationInterval);
   presentationInterval = setInterval(() => {
     if (!isPlaying) return;
-    const currentTab = sessionStorage.getItem('dh_active_tab') || '1';
+    const currentTab = safeGetStorage('dh_active_tab', '1');
     let nextTab = '1';
     if (currentTab === '1') nextTab = '2';
     else if (currentTab === '2') nextTab = '3';
@@ -1271,7 +1286,7 @@ function updatePlayPauseButton() {
 
 function togglePresentation() {
   isPlaying = !isPlaying;
-  sessionStorage.setItem('dh_presentation_playing', isPlaying ? 'true' : 'false');
+  safeSetStorage('dh_presentation_playing', isPlaying ? 'true' : 'false');
   updatePlayPauseButton();
   if (isPlaying) {
     startPresentation();
@@ -1294,7 +1309,7 @@ document.getElementById('hdrDate').textContent = fmtDateBR(DATA.meta.posicao_em)
 document.getElementById('footFonte').textContent = `Fonte: ${DATA.meta.fonte} | Desenvolvido por Geisa Gomes`;
 document.getElementById('footAtualizado').textContent = (DATA.meta.atualizado_em && DATA.meta.atualizado_em.includes('às')) ? `Dados atualizados em ${DATA.meta.atualizado_em}` : `Dados atualizados em ${fmtDateBR(DATA.meta.atualizado_em)}`;
 
-const initialTab = sessionStorage.getItem('dh_active_tab') || '1';
+const initialTab = safeGetStorage('dh_active_tab', '1');
 activateTab(initialTab);
 
 // Auto-refresh a cada 10 minutos (600.000 ms) para carregar novos dados
