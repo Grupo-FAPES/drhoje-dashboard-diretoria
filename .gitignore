@@ -1,7 +1,11 @@
 # Credenciais e configuracao ambiente
 .env
 
-# Python e temporarios
+# Protecao LGPD: pasta de dados brutos e CSVs locais
+data/
+*.csv
+
+# Python e logs de execucao
 __pycache__/
 *.pyc
 *.log
