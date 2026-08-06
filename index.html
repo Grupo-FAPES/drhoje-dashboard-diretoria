@@ -1351,11 +1351,17 @@ function handleLogin() {
   }
 }
 
-window.addEventListener('DOMContentLoaded', () => {
-  document.getElementById('login-submit-btn').addEventListener('click', handleLogin);
-  document.getElementById('password').addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') handleLogin();
-  });
+function initLogin() {
+  const submitBtn = document.getElementById('login-submit-btn');
+  if (submitBtn) {
+    submitBtn.addEventListener('click', handleLogin);
+  }
+  const passInput = document.getElementById('password');
+  if (passInput) {
+    passInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') handleLogin();
+    });
+  }
   
   // Play/Pause button initialization
   const btnPP = document.getElementById('btnPlayPause');
@@ -1377,7 +1383,13 @@ window.addEventListener('DOMContentLoaded', () => {
   } catch(err) {
     console.warn('sessionStorage ignorado no protocolo file:///', err);
   }
-});
+}
+
+if (document.readyState === 'loading') {
+  window.addEventListener('DOMContentLoaded', initLogin);
+} else {
+  initLogin();
+}
 </script>
 
 </div>
