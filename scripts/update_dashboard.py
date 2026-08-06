@@ -845,10 +845,10 @@ faturamento_data = {
     "mensagem_diretoria": mensagem_diretoria
 }
 
-# Resolve index.html e dashboard_dr_hoje.html no diretório raiz (pai de scripts/)
+# Resolve index.html no diretório raiz (pai de scripts/)
 script_dir = os.path.dirname(os.path.abspath(__file__))
 root_dir = os.path.dirname(script_dir)
-html_files = [os.path.join(root_dir, "index.html"), os.path.join(root_dir, "dashboard_dr_hoje.html")]
+html_files = [os.path.join(root_dir, "index.html")]
 
 for file_path in html_files:
     if not os.path.exists(file_path):
