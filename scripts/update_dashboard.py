@@ -869,7 +869,7 @@ for file_path in html_files:
         "empresa": "DR. HOJE",
         "fonte": "Sistema de Gestão DR. HOJE",
         "posicao_em": today.strftime("%Y-%m-%d"),
-        "atualizado_em": today.strftime("%Y-%m-%d"),
+        "atualizado_em": today.strftime("%d/%m/%Y às %H:%M:%S"),
         "versao_modelo": "1.0",
         "observacao": "Atualizado de forma automática via GitHub Actions"
     }
