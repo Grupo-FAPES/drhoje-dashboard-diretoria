@@ -1,11 +1,10 @@
 name: pages build and deployment
 
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - 'scripts/trigger_pages.txt'
+  workflow_run:
+    workflows: ["Update Dashboard Data"]
+    types:
+      - completed
   workflow_dispatch:
 
 permissions:
@@ -19,6 +18,7 @@ concurrency:
 
 jobs:
   deploy:
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
