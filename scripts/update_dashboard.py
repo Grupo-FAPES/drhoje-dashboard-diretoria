@@ -883,8 +883,21 @@ for file_path in html_files:
         "faturamento": faturamento_data
     }
     
+    # Clean NaN / Inf values before JSON serialization
+    import math
+    def clean_nan(obj):
+        if isinstance(obj, float):
+            if math.isnan(obj) or math.isinf(obj):
+                return None
+            return obj
+        elif isinstance(obj, dict):
+            return {k: clean_nan(v) for k, v in obj.items()}
+        elif isinstance(obj, list):
+            return [clean_nan(v) for v in obj]
+        return obj
+
     # Serialize to compact JSON and encode to base64
-    new_data_str = json.dumps(new_data, ensure_ascii=False)
+    new_data_str = json.dumps(clean_nan(new_data), ensure_ascii=False)
     b64_str = base64.b64encode(new_data_str.encode('utf-8')).decode('utf-8')
     
     # Write back to file
