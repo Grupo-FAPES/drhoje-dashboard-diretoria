@@ -22,13 +22,13 @@ echo [2/3] Verificando alteracoes no index.html...
 echo ========================================================
 
 git config --global user.name "Marcelo Guedes"
-git config --global user.email "marceloguedes@grupofapes.com.br"
+git config --global user.email "marcelo.guedes@doutorhoje.com.br"
 
 git add index.html .gitignore dashboard_dr_hoje.html scripts/ .github/
 git diff --staged --quiet
 if %ERRORLEVEL% NEQ 0 (
     echo [3/3] Commitando e enviando painel atualizado para o GitHub Pages...
-    git commit -m "data: atualizar base de dados do dashboard diretoria" >> %LOGFILE% 2>&1
+    git commit -m "data: atualizar base de dados com data e hora exatas" >> %LOGFILE% 2>&1
     git push origin main >> %LOGFILE% 2>&1
     echo [%DATE% %TIME%] SUCESSO! Dashboard da Diretoria atualizado e publicado no GitHub! >> %LOGFILE%
     echo.
